@@ -4,7 +4,7 @@ import com.arun.moviedb.sdk.dispatcher.ActionDispatcher
 import com.arun.moviedb.sdk.dispatcher.actions.Action
 import com.arun.moviedb.sdk.dispatcher.actions.ActionTypes
 import com.arun.moviedb.sdk.handlers.ScreenActionHandler
-import com.arun.moviedb.sdk.viewmodels.CounterViewModel
+import com.arun.moviedb.sdk.viewmodels.counter.CounterViewModel
 import com.arun.moviedb.sdk.viewmodels.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -19,12 +19,10 @@ class CounterActionHandler: ScreenActionHandler {
             val currentCount = counterViewModel.counter
             when (action.type) {
                 ActionTypes.INCREMENT_COUNTER -> {
-                    val updatedState = counterViewModel.copy(counterViewModel.appState, currentCount + 1)
-                    viewModel.value = updatedState
+                    viewModel.value = counterViewModel.copy(counter = currentCount + 1)
                 }
                 ActionTypes.DECREMENT_COUNTER -> {
-                    val updatedState = counterViewModel.copy(counterViewModel.appState, currentCount - 1)
-                    viewModel.value = updatedState
+                    viewModel.value = counterViewModel.copy(counter = currentCount - 1)
                 }
                 else -> {}
             }

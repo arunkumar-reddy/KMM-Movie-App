@@ -1,6 +1,10 @@
 package com.arun.moviedb.sdk.screen
 
 enum class ScreenTypes {
-    COUNTER,
-    ANNOUNCEMENT
+    HOME,
+    BROWSE,
+    ITEM,
+    FAVORITES,
+    COUNTER
 }
+

@@ -3,6 +3,7 @@ package com.arun.moviedb.sdk.dispatcher
 import com.arun.moviedb.sdk.handlers.AppActionHandler
 import com.arun.moviedb.sdk.handlers.ScreenActionHandler
 import com.arun.moviedb.sdk.handlers.counter.CounterActionHandler
+import com.arun.moviedb.sdk.navigation.NavigationManager
 
 object ActionMapper {
     fun getHandlersForScreen(): List<ScreenActionHandler> {
@@ -12,6 +13,8 @@ object ActionMapper {
     }
 
     fun getHandlersForApp(): List<AppActionHandler> {
-        return listOf()
+        return listOf(
+            NavigationManager()
+        )
     }
 }
