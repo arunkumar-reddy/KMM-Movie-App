@@ -10,7 +10,7 @@ import com.arun.moviedb.sdk.navigation.router.Router
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class NavigationManager: Navigator, AppActionHandler {
-    val navigationStack: ArrayDeque<NavigationState> = ArrayDeque()
+    private val navigationStack: ArrayDeque<NavigationState> = ArrayDeque()
 
     override fun navigateTo(screenName: String) {
         val screenType = Router.getScreenType(screenName)
