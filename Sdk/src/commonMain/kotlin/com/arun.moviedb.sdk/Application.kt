@@ -13,12 +13,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class Application: ActionDispatcher {
+class Application(private val initState: AppState? = null): ActionDispatcher {
     private val _mutableAppState = MutableStateFlow(AppState())
     val appState: StateFlow<AppState> = _mutableAppState
 
     init {
-        dispatch(NavigationAction(NavigationPayload(NavigationType.FORWARD, ScreenNames.DEFAULT)))
+        initState?.let {
+            _mutableAppState.value = initState
+        } ?: dispatch(NavigationAction(NavigationPayload(NavigationType.FORWARD, ScreenNames.DEFAULT)))
     }
 
     override fun dispatch(action: Action) {

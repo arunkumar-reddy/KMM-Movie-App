@@ -3,7 +3,6 @@ package com.arun.moviedb.sdk.navigation.router
 import com.arun.moviedb.sdk.AppState
 import com.arun.moviedb.sdk.screen.ScreenNames
 import com.arun.moviedb.sdk.screen.ScreenTypes
-import com.arun.moviedb.sdk.viewmodels.counter.CounterViewModel
 import com.arun.moviedb.sdk.viewmodels.ViewModel
 import com.arun.moviedb.sdk.viewmodels.ViewModelCreator
 import com.arun.moviedb.sdk.viewmodels.counter.CounterViewModelCreator
