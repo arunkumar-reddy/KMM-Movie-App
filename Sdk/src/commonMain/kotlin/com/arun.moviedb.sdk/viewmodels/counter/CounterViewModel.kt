@@ -1,14 +1,12 @@
 package com.arun.moviedb.sdk.viewmodels.counter
 
-import com.arun.moviedb.sdk.AppState
 import com.arun.moviedb.sdk.viewmodels.ViewModel
-import com.arun.moviedb.sdk.viewmodels.ViewModelCreator
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.arun.moviedb.sdk.viewmodels.ViewModelBuilder
 
-data class CounterViewModel(override val appState: AppState, val counter: Long = 0): ViewModel(appState)
+data class CounterViewModel(val counter: Long = 0): ViewModel
 
-class CounterViewModelCreator: ViewModelCreator {
-    override fun createViewModel(appState: AppState): MutableStateFlow<ViewModel> {
-        return MutableStateFlow(CounterViewModel(appState, 0))
+class CounterViewModelBuilder: ViewModelBuilder<CounterViewModel> {
+    override fun build(): CounterViewModel {
+        return CounterViewModel(0)
     }
 }

@@ -26,10 +26,8 @@ class Application(private val initState: AppState? = null): ActionDispatcher {
     override fun dispatch(action: Action) {
         val actionDispatcher: ActionDispatcher = this
         CoroutineScope(Dispatchers.Default).launch {
-            val screenActionHandlers = ActionMapper.getHandlersForScreen()
-            val appActionHandlers = ActionMapper.getHandlersForApp()
-            screenActionHandlers.forEach { handler -> handler.handleAction(action, appState.value.currentScreenViewModel, actionDispatcher) }
-            appActionHandlers.forEach { handler -> handler.handleAction(action, _mutableAppState, actionDispatcher) }
+            val actionHandlers = ActionMapper.getHandlersForAction(action.type)
+            actionHandlers.forEach { handler -> handler.handleAction(action, _mutableAppState, actionDispatcher) }
         }
     }
 }

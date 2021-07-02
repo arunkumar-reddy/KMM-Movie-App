@@ -1,12 +1,9 @@
 package com.arun.moviedb.sdk.navigation.router
 
-import com.arun.moviedb.sdk.AppState
 import com.arun.moviedb.sdk.screen.ScreenNames
 import com.arun.moviedb.sdk.screen.ScreenTypes
 import com.arun.moviedb.sdk.viewmodels.ViewModel
-import com.arun.moviedb.sdk.viewmodels.ViewModelCreator
-import com.arun.moviedb.sdk.viewmodels.counter.CounterViewModelCreator
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.arun.moviedb.sdk.viewmodels.counter.CounterViewModelBuilder
 
 object Router {
     fun getScreenType(screenName: String): ScreenTypes {
@@ -20,11 +17,11 @@ object Router {
         }
     }
 
-    fun getViewModelForScreen(appState: AppState, screenTypes: ScreenTypes): MutableStateFlow<ViewModel> {
-        val viewModelCreator: ViewModelCreator =  when(screenTypes) {
-            ScreenTypes.COUNTER -> CounterViewModelCreator()
-            else -> CounterViewModelCreator()
+    fun getViewModelForScreen(screenTypes: ScreenTypes): ViewModel {
+        val viewModelBuilder =  when(screenTypes) {
+            ScreenTypes.COUNTER -> CounterViewModelBuilder()
+            else -> CounterViewModelBuilder()
         }
-        return viewModelCreator.createViewModel(appState)
+        return viewModelBuilder.build()
     }
 }
