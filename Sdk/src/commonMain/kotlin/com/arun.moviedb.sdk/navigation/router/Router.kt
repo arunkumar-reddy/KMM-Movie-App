@@ -4,6 +4,7 @@ import com.arun.moviedb.sdk.screen.ScreenNames
 import com.arun.moviedb.sdk.screen.ScreenTypes
 import com.arun.moviedb.sdk.viewmodels.ViewModel
 import com.arun.moviedb.sdk.viewmodels.counter.CounterViewModelBuilder
+import com.arun.moviedb.sdk.viewmodels.home.HomeScreenViewModelBuilder
 
 object Router {
     fun getScreenType(screenName: String): ScreenTypes {
@@ -20,6 +21,7 @@ object Router {
     fun getViewModelForScreen(screenTypes: ScreenTypes): ViewModel {
         val viewModelBuilder =  when(screenTypes) {
             ScreenTypes.COUNTER -> CounterViewModelBuilder()
+            ScreenTypes.HOME -> HomeScreenViewModelBuilder()
             else -> CounterViewModelBuilder()
         }
         return viewModelBuilder.build()

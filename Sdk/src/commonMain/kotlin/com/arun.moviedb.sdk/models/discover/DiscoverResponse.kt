@@ -1,37 +1,38 @@
 package com.arun.moviedb.sdk.models.discover
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class DiscoverSuccess(
     val page: Int,
     val results: List<DiscoverResult>?,
-    val totalResults: Int,
-    val totalPages: Int
+    @SerialName("total_results") val totalResults: Int,
+    @SerialName("total_pages") val totalPages: Int
 )
 
 @Serializable
 data class DiscoverResult(
-    val posterPath: String?,
+    @SerialName("poster_path") val posterPath: String?,
     val adult: Boolean,
     val overview: String,
     val id: Int,
-    val releaseDate: String,
-    val genreIds: List<Int>,
-    val originalTitle: String,
-    val originalLanguage: String,
+    @SerialName("release_date") val releaseDate: String,
+    @SerialName("genre_ids") val genreIds: List<Int>,
+    @SerialName("original_title") val originalTitle: String,
+    @SerialName("original_language") val originalLanguage: String,
     val title: String,
-    val backdropPath: String?,
+    @SerialName("backdrop_path") val backdropPath: String?,
     val popularity: Double,
-    val voteCount: Int,
-    val voteAverage: Double,
+    @SerialName("vote_count") val voteCount: Int,
+    @SerialName("vote_average") val voteAverage: Double,
     val video: Boolean
 )
 
 @Serializable
 data class DiscoverError(
-    val statusMessage: String,
-    val statusCode: Int
+    @SerialName("status_message") val statusMessage: String,
+    @SerialName("status_code") val statusCode: Int
 )
 
 sealed class DiscoverResponse() {
