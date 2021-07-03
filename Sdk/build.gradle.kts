@@ -1,6 +1,6 @@
 buildscript {
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.32")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20")
         classpath("com.android.tools.build:gradle:4.2.0")
     }
 }
@@ -8,6 +8,7 @@ buildscript {
 plugins {
     id("com.android.library") version ("4.2.0")
     kotlin("multiplatform") version "1.5.20"
+    kotlin("plugin.serialization") version "1.5.0"
     id("maven-publish")
 }
 
@@ -55,32 +56,43 @@ kotlin {
             }
         }
     }
-    val hostOs = System.getProperty("os.name")
-    val isMingwX64 = hostOs.startsWith("Windows")
-    val nativeTarget = when {
-        hostOs == "Mac OS X" -> macosX64("native")
-        hostOs == "Linux" -> linuxX64("native")
-        isMingwX64 -> mingwX64("native")
-        else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
-    }
+    // val hostOs = System.getProperty("os.name")
+    // val isMingwX64 = hostOs.startsWith("Windows")
+    // val nativeTarget = when {
+    //    hostOs == "Mac OS X" -> macosX64("native")
+    //    hostOs == "Linux" -> linuxX64("native")
+    //    isMingwX64 -> mingwX64("native")
+    //    else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
+    // }
 
-    
+
     sourceSets {
+        val androidMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-android:1.6.1")
+            }
+        }
         val commonMain by getting {
             dependencies {
+                implementation("io.ktor:ktor-client-core:1.6.1")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test"))
+                //implementation(kotlin("test"))
             }
         }
         val jvmMain by getting
         val jvmTest by getting
-        val jsMain by getting
+        val jsMain by getting {
+            dependencies {
+                //implementation("io.ktor:ktor-client-js:1.6.1")
+            }
+        }
         val jsTest by getting
-        val nativeMain by getting
-        val nativeTest by getting
+        // val nativeMain by getting
+        // val nativeTest by getting
     }
 }
