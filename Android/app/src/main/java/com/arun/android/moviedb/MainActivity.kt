@@ -7,41 +7,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.lifecycleScope
-import com.arun.android.moviedb.screens.CounterScreen
+import com.arun.android.moviedb.screens.Screen
 import com.arun.moviedb.sdk.AppState
-import com.arun.moviedb.sdk.dispatcher.ActionDispatcher
-import com.arun.moviedb.sdk.viewmodels.CounterViewModel
-import com.arun.moviedb.sdk.viewmodels.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.arun.moviedb.sdk.Application
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycleScope.launchWhenCreated {
             setContent {
-                Application()
+                App(Application())
             }
         }
     }
 }
 
 @Composable
-fun Application() {
-    val application = com.arun.moviedb.sdk.Application()
+fun App(application: Application) {
     val state: State<AppState> = application.appState.collectAsState()
     state.value.screenViewModel?.let { viewModel ->
         Screen(viewModel, application)
     }
 }
 
-@Composable
-fun Screen(viewModelFlow: MutableStateFlow<ViewModel>, actionDispatcher: ActionDispatcher) {
-    val state = viewModelFlow.collectAsState()
-
-    when(state.value) {
-        is CounterViewModel -> {
-            CounterScreen(state.value as CounterViewModel, actionDispatcher)
-        }
-        else -> {}
-    }
-}

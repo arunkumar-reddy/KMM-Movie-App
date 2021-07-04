@@ -1,4 +1,4 @@
-package com.arun.android.moviedb.screens
+package com.arun.android.moviedb.screens.counter
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -11,7 +11,10 @@ import androidx.compose.ui.unit.dp
 import com.arun.moviedb.sdk.dispatcher.ActionDispatcher
 import com.arun.moviedb.sdk.dispatcher.actions.Action
 import com.arun.moviedb.sdk.dispatcher.actions.ActionTypes
-import com.arun.moviedb.sdk.viewmodels.CounterViewModel
+import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationAction
+import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationPayload
+import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationType
+import com.arun.moviedb.sdk.viewmodels.counter.CounterViewModel
 
 @Composable
 fun CounterScreen(counterViewModel: CounterViewModel, actionDispatcher: ActionDispatcher) {
@@ -25,7 +28,7 @@ fun CounterScreen(counterViewModel: CounterViewModel, actionDispatcher: ActionDi
         Button(onClick = { actionDispatcher.dispatch(Action(ActionTypes.DECREMENT_COUNTER)) }) {
             Text("Decrement Counter")
         }
-        Button(onClick = { /*TODO*/ }) {
+        Button(onClick = { actionDispatcher.dispatch(NavigationAction(NavigationPayload(NavigationType.FORWARD, "/home"))) }) {
             Text("Submit")
         }
     }
@@ -44,7 +47,7 @@ fun PreviewCounterScreen() {
         Button(onClick = {}) {
             Text("Decrement Counter")
         }
-        Button(onClick = { /*TODO*/ }) {
+        Button(onClick = {}) {
             Text("Submit")
         }
     }
