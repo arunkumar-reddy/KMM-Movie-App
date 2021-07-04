@@ -10,5 +10,6 @@ interface ActionHandler {
         action: Action,
         state: AppState,
         dispatcher: ActionDispatcher,
-        getMutableState: suspend ((MutableStateFlow<AppState>) -> Unit) -> Unit)
+        getMutableState: suspend ((MutableStateFlow<AppState>) -> Unit) -> Unit
+    )
 }

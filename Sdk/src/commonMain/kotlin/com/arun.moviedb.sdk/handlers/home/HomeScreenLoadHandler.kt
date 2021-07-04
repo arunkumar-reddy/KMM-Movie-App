@@ -36,15 +36,15 @@ class HomeScreenLoadHandler: ActionHandler {
                 val popularTvShows = processResponse(popularTvShowsData.await())
                 val latestTvShows = processResponse(latestTvShowsData.await())
 
+                val homeScreenViewModel = HomeScreenViewModel(
+                    true,
+                    popularMovies = popularMovies,
+                    regionalMovies = regionalMovies,
+                    latestMovies = latestMovies,
+                    popularTvShows = popularTvShows,
+                    latestTvShows = latestTvShows
+                )
                 getMutableState { mutableState ->
-                    val homeScreenViewModel = HomeScreenViewModel(
-                        true,
-                        popularMovies = popularMovies,
-                        regionalMovies = regionalMovies,
-                        latestMovies = latestMovies,
-                        popularTvShows = popularTvShows,
-                        latestTvShows = latestTvShows
-                    )
                     mutableState.value = mutableState.value.copy(screenViewModel = homeScreenViewModel)
                 }
             }
