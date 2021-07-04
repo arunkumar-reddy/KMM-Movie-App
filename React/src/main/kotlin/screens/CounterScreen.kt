@@ -3,7 +3,10 @@ package screens
 import com.arun.moviedb.sdk.dispatcher.ActionDispatcher
 import com.arun.moviedb.sdk.dispatcher.actions.Action
 import com.arun.moviedb.sdk.dispatcher.actions.ActionTypes
-import com.arun.moviedb.sdk.viewmodels.CounterViewModel
+import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationAction
+import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationPayload
+import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationType
+import com.arun.moviedb.sdk.viewmodels.counter.CounterViewModel
 import kotlinx.html.js.onClickFunction
 import react.*
 import react.dom.*
@@ -20,7 +23,6 @@ val CounterScreen = functionalComponent<CounterScreenProps> { props ->
     button {
         attrs {
             onClickFunction = {
-                console.log("increment counter clicked")
                 props.actionDispatcher.dispatch(Action(ActionTypes.INCREMENT_COUNTER))
             }
             +"Increment Counter"
@@ -28,11 +30,18 @@ val CounterScreen = functionalComponent<CounterScreenProps> { props ->
     }
     button {
         attrs {
-            name = "Decrement Counter"
             onClickFunction = {
                 props.actionDispatcher.dispatch(Action(ActionTypes.DECREMENT_COUNTER))
             }
             +"Decrement Counter"
+        }
+    }
+    button {
+        attrs {
+            onClickFunction = {
+                props.actionDispatcher.dispatch(NavigationAction(NavigationPayload(NavigationType.FORWARD, "/home")))
+            }
+            +"Submit"
         }
     }
 }

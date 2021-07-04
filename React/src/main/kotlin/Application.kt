@@ -1,6 +1,6 @@
 import com.arun.moviedb.sdk.AppState
 import com.arun.moviedb.sdk.Application
-import com.arun.moviedb.sdk.viewmodels.CounterViewModel
+import com.arun.moviedb.sdk.viewmodels.counter.CounterViewModel
 import react.dom.render
 import kotlinx.browser.document
 import kotlinx.browser.window
@@ -34,16 +34,16 @@ val WebApp = functionalComponent<WebAppProps> { props ->
     useEffect(listOf(state.appState)) {
         CoroutineScope(Dispatchers.Main).launch {
             props.application.appState.collect { appState ->
-                console.log("Updating App State for screen: " + appState.screenType + " with: " + (appState.screenViewModel?.value as CounterViewModel).counter)
+                console.log("Updating App State for screen: " + appState.navigationState?.screenType + " with: " + (appState.screenViewModel as CounterViewModel).counter)
                 setState(WebAppState(appState))
             }
         }
     }
     div {
-        state.appState?.screenViewModel?.let { viewModel ->
+        state.appState?.screenViewModel?.let { screenViewModel ->
             child(Screen) {
                 attrs {
-                    viewModelFlow = viewModel
+                    viewModel = screenViewModel
                     actionDispatcher = props.application
                 }
             }
