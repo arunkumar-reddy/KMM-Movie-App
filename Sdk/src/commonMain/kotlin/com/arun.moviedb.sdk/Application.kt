@@ -12,9 +12,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 
 class Application(private val initState: AppState? = null): ActionDispatcher {
     private val _mutableAppState = MutableStateFlow(AppState())
+    private val actionHandlerLock = Mutex()
     val appState: StateFlow<AppState> = _mutableAppState
 
     init {
@@ -25,9 +28,19 @@ class Application(private val initState: AppState? = null): ActionDispatcher {
 
     override fun dispatch(action: Action) {
         val actionDispatcher: ActionDispatcher = this
-        CoroutineScope(Dispatchers.Default).launch {
+        CoroutineScope(Dispatchers.Main).launch {
             val actionHandlers = ActionMapper.getHandlersForAction(action.type)
-            actionHandlers.forEach { handler -> handler.handleAction(action, _mutableAppState, actionDispatcher) }
+            actionHandlers.forEach { handler ->
+                handler.handleAction(action, _mutableAppState.value, actionDispatcher) {
+                    getMutableStateWithLock(it)
+                }
+            }
+        }
+    }
+
+    private suspend fun getMutableStateWithLock(updateState: (MutableStateFlow<AppState>) -> Unit) {
+        actionHandlerLock.withLock {
+            updateState(_mutableAppState)
         }
     }
 }

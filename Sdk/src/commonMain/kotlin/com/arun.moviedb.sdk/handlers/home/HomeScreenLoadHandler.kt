@@ -15,8 +15,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 class HomeScreenLoadHandler: ActionHandler {
-    override suspend fun handleAction(action: Action, state: MutableStateFlow<AppState>, dispatcher: ActionDispatcher) {
-        if (state.value.screenViewModel is HomeScreenViewModel) {
+    override suspend fun handleAction(
+        action: Action,
+        state: AppState,
+        dispatcher: ActionDispatcher,
+        getMutableState: suspend ((MutableStateFlow<AppState>) -> Unit) -> Unit
+    ) {
+        if (state.screenViewModel is HomeScreenViewModel) {
             CoroutineScope(Dispatchers.Default).launch {
                 val client = MovieClient.getInstance()
                 val popularMoviesData = async { client.getMostPopularMovies() }
@@ -31,15 +36,17 @@ class HomeScreenLoadHandler: ActionHandler {
                 val popularTvShows = processResponse(popularTvShowsData.await())
                 val latestTvShows = processResponse(latestTvShowsData.await())
 
-                val homeScreenViewModel = HomeScreenViewModel(
+                getMutableState { mutableState ->
+                    val homeScreenViewModel = HomeScreenViewModel(
                         true,
                         popularMovies = popularMovies,
                         regionalMovies = regionalMovies,
                         latestMovies = latestMovies,
                         popularTvShows = popularTvShows,
                         latestTvShows = latestTvShows
-                )
-                state.value = state.value.copy(screenViewModel = homeScreenViewModel)
+                    )
+                    mutableState.value = mutableState.value.copy(screenViewModel = homeScreenViewModel)
+                }
             }
         }
     }

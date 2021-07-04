@@ -6,5 +6,9 @@ import com.arun.moviedb.sdk.dispatcher.ActionDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 
 interface ActionHandler {
-    suspend fun handleAction(action: Action, state: MutableStateFlow<AppState>, dispatcher: ActionDispatcher)
+    suspend fun handleAction(
+        action: Action,
+        state: AppState,
+        dispatcher: ActionDispatcher,
+        getMutableState: suspend ((MutableStateFlow<AppState>) -> Unit) -> Unit)
 }

@@ -10,14 +10,14 @@ import com.arun.moviedb.sdk.navigation.Navigator
 import com.arun.moviedb.sdk.navigation.router.Router
 import kotlinx.coroutines.flow.MutableStateFlow
 
-class NavigationHandler(val navigator: Navigator): ActionHandler {
+class NavigationHandler(private val navigator: Navigator): ActionHandler {
     override suspend fun handleAction(
         action: Action,
-        state: MutableStateFlow<AppState>,
-        dispatcher: ActionDispatcher
+        state: AppState,
+        dispatcher: ActionDispatcher,
+        getMutableState: suspend ((MutableStateFlow<AppState>) -> Unit) -> Unit
     ) {
         if (action is NavigationAction) {
-            val appState = state.value
             when (action.payload.navigationType) {
                 NavigationType.FORWARD -> {
                     action.payload.screenName?.let { navigator.navigateTo(it) }
@@ -31,7 +31,9 @@ class NavigationHandler(val navigator: Navigator): ActionHandler {
             }
             val currentScreen = navigator.getCurrentScreen()
             val viewModel = Router.getViewModelForScreen(currentScreen.screenType)
-            state.value = appState.copy(navigationState = currentScreen, screenViewModel = viewModel)
+            getMutableState { mutableState ->
+                mutableState.value = mutableState.value.copy(navigationState = currentScreen, screenViewModel = viewModel)
+            }
         }
     }
 }
