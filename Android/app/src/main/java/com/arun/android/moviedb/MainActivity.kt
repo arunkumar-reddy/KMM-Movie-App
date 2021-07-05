@@ -29,4 +29,3 @@ fun App(application: Application) {
         Screen(viewModel, application)
     }
 }
-

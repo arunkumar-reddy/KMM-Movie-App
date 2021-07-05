@@ -17,18 +17,18 @@ import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationType
 import com.arun.moviedb.sdk.viewmodels.counter.CounterViewModel
 
 @Composable
-fun CounterScreen(counterViewModel: CounterViewModel, actionDispatcher: ActionDispatcher) {
+fun CounterScreen(counterViewModel: CounterViewModel, dispatcher: ActionDispatcher) {
     Column(
         modifier = Modifier.padding(16.dp)
     ) {
         Text("The Current Count is: " + counterViewModel.counter)
-        Button(onClick = { actionDispatcher.dispatch(Action(ActionTypes.INCREMENT_COUNTER)) }) {
+        Button(onClick = { dispatcher.dispatch(Action(ActionTypes.INCREMENT_COUNTER)) }) {
             Text("Increment Counter")
         }
-        Button(onClick = { actionDispatcher.dispatch(Action(ActionTypes.DECREMENT_COUNTER)) }) {
+        Button(onClick = { dispatcher.dispatch(Action(ActionTypes.DECREMENT_COUNTER)) }) {
             Text("Decrement Counter")
         }
-        Button(onClick = { actionDispatcher.dispatch(NavigationAction(NavigationPayload(NavigationType.FORWARD, "/home"))) }) {
+        Button(onClick = { dispatcher.dispatch(NavigationAction(NavigationPayload(NavigationType.FORWARD, "/home"))) }) {
             Text("Submit")
         }
     }
