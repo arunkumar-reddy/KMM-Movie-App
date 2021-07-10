@@ -4,9 +4,11 @@ import com.arun.moviedb.sdk.dispatcher.ActionDispatcher
 import com.arun.moviedb.sdk.dispatcher.ActionMapper
 import com.arun.moviedb.sdk.dispatcher.actions.Action
 import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationAction
-import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationPayload
 import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationType
 import com.arun.moviedb.sdk.screen.ScreenNames
+import com.arun.moviedb.sdk.viewmodels.appbar.AppBarState
+import com.arun.moviedb.sdk.viewmodels.bottombar.BottomBarBuilder
+import com.arun.moviedb.sdk.viewmodels.bottombar.BottomBarState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,14 +18,17 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
 class Application(private val initState: AppState? = null): ActionDispatcher {
-    private val _mutableAppState = MutableStateFlow(AppState())
+    private val _mutableAppState = MutableStateFlow(AppState(
+        appBarState = AppBarState(),
+        bottomBarState = BottomBarState(showBottomBar = true, bottomBarItems = BottomBarBuilder.getBottomBarItems())
+    ))
     private val actionHandlerLock = Mutex()
     val appState: StateFlow<AppState> = _mutableAppState
 
     init {
         initState?.let {
             _mutableAppState.value = initState
-        } ?: dispatch(NavigationAction(NavigationPayload(NavigationType.FORWARD, ScreenNames.DEFAULT)))
+        } ?: dispatch(NavigationAction(NavigationType.FORWARD, ScreenNames.DEFAULT))
     }
 
     override fun dispatch(action: Action) {

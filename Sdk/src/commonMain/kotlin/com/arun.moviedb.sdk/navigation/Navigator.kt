@@ -8,5 +8,5 @@ interface Navigator {
     fun navigateTo(screenName: String)
     fun goBack()
     fun replaceAndNavigateTo(screenName: String)
-    fun getCurrentScreen(): NavigationState
+    fun getCurrentScreen(): NavigationState?
 }

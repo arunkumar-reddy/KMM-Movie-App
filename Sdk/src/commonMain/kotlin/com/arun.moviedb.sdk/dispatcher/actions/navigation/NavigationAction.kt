@@ -1,7 +1,6 @@
 package com.arun.moviedb.sdk.dispatcher.actions.navigation
 
 import com.arun.moviedb.sdk.dispatcher.actions.Action
-import com.arun.moviedb.sdk.dispatcher.actions.ActionPayload
 import com.arun.moviedb.sdk.dispatcher.actions.ActionTypes
 
 enum class NavigationType {
@@ -10,6 +9,7 @@ enum class NavigationType {
     REPLACE
 }
 
-data class NavigationPayload(val navigationType: NavigationType, val screenName: String? = null): ActionPayload
-
-data class NavigationAction(override val payload: NavigationPayload): Action(ActionTypes.NAVIGATE, payload)
+data class NavigationAction(
+    val navigationType: NavigationType,
+    val screenName: String? = null
+): Action(ActionTypes.NAVIGATE)
