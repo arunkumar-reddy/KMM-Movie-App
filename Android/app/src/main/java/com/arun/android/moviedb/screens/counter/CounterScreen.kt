@@ -12,8 +12,8 @@ import com.arun.moviedb.sdk.dispatcher.ActionDispatcher
 import com.arun.moviedb.sdk.dispatcher.actions.Action
 import com.arun.moviedb.sdk.dispatcher.actions.ActionTypes
 import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationAction
-import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationPayload
 import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationType
+import com.arun.moviedb.sdk.screen.ScreenNames
 import com.arun.moviedb.sdk.viewmodels.counter.CounterViewModel
 
 @Composable
@@ -28,7 +28,7 @@ fun CounterScreen(counterViewModel: CounterViewModel, dispatcher: ActionDispatch
         Button(onClick = { dispatcher.dispatch(Action(ActionTypes.DECREMENT_COUNTER)) }) {
             Text("Decrement Counter")
         }
-        Button(onClick = { dispatcher.dispatch(NavigationAction(NavigationPayload(NavigationType.FORWARD, "/home"))) }) {
+        Button(onClick = { dispatcher.dispatch(NavigationAction(NavigationType.FORWARD, ScreenNames.HOME)) }) {
             Text("Submit")
         }
     }
