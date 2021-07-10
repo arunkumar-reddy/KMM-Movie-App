@@ -69,14 +69,15 @@ kotlin {
     sourceSets {
         val androidMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-android:1.6.1")
+                implementation("io.ktor:ktor-client-cio:1.6.1")
             }
         }
         val commonMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-core:1.6.1")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
+                implementation("io.ktor:ktor-client-serialization:1.6.1")
+                //implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
             }
         }
         val commonTest by getting {

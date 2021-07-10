@@ -1,15 +1,22 @@
 package com.arun.moviedb.sdk.network
 
+import com.arun.moviedb.sdk.models.discover.DiscoverError
 import com.arun.moviedb.sdk.models.discover.DiscoverResponse
 import com.arun.moviedb.sdk.network.request.RequestBuilder
 import io.ktor.client.*
 import io.ktor.client.call.*
+import io.ktor.client.features.*
+import io.ktor.client.features.json.*
+import io.ktor.client.features.json.serializer.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import io.ktor.http.*
 
-class MovieClient() {
-    private val client = HttpClient()
+class MovieClient {
+    private val client = HttpClient {
+        install(JsonFeature) {
+            serializer = KotlinxSerializer()
+        }
+    }
 
     suspend fun getMostPopularMovies(): DiscoverResponse {
         val queryParams = createQueryParams()
@@ -42,10 +49,15 @@ class MovieClient() {
     }
 
     private suspend fun fetchData(path: String, queryParams: Map<String, String>? = null): DiscoverResponse {
-        val response: HttpResponse = client.request { RequestBuilder.createRequest(API, path, queryParams) }
-        return when (response.status) {
-            HttpStatusCode.OK -> DiscoverResponse.Success(response.receive())
-            else -> DiscoverResponse.Error(response.receive())
+        return try {
+            val response: HttpResponse = client.get(RequestBuilder.createRequestUrl(API, path, queryParams))
+            DiscoverResponse.Success(response.receive())
+        } catch(ex: Exception) {
+            when (ex) {
+                is ClientRequestException -> DiscoverResponse.Error(ex.response.receive())
+                is ServerResponseException -> DiscoverResponse.Error(ex.response.receive())
+                else -> DiscoverResponse.Error(DiscoverError("Unknown Error", -1, false))
+            }
         }
     }
 
@@ -56,7 +68,7 @@ class MovieClient() {
     }
 
     companion object {
-        const val API = "https://api.themoviedb.org/"
+        const val API = "api.themoviedb.org"
         const val API_KEY = "def588ca30d1e24ad80f41e04197ec3f"
         const val DISCOVER_MOVIE_PATH = "3/discover/movie"
         const val DISCOVER_TV_PATH = "3/discover/tv"

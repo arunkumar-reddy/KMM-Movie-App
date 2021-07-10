@@ -5,7 +5,11 @@ import androidx.compose.runtime.Composable
 import com.arun.moviedb.sdk.dispatcher.ActionDispatcher
 import com.arun.moviedb.sdk.dispatcher.actions.Action
 import com.arun.moviedb.sdk.dispatcher.actions.ActionTypes
+import com.arun.moviedb.sdk.network.MovieClient
 import com.arun.moviedb.sdk.viewmodels.home.HomeScreenViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(viewModel: HomeScreenViewModel, dispatcher: ActionDispatcher) {

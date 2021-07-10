@@ -32,7 +32,8 @@ data class DiscoverResult(
 @Serializable
 data class DiscoverError(
     @SerialName("status_message") val statusMessage: String,
-    @SerialName("status_code") val statusCode: Int
+    @SerialName("status_code") val statusCode: Int,
+    val success: Boolean
 )
 
 sealed class DiscoverResponse() {
