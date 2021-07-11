@@ -1,6 +1,6 @@
 import com.arun.moviedb.sdk.AppState
 import com.arun.moviedb.sdk.Application
-import com.arun.moviedb.sdk.viewmodels.counter.CounterViewModel
+import components.appbar.AppBar
 import react.dom.render
 import kotlinx.browser.document
 import kotlinx.browser.window
@@ -8,8 +8,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.css.height
+import kotlinx.css.vh
+import kotlinx.css.vw
+import kotlinx.css.width
 import react.*
 import react.dom.div
+import styled.css
+import styled.styledDiv
 
 fun main() {
     window.onload = {
@@ -31,15 +37,27 @@ class WebAppState(val appState: AppState?): RState
 
 val WebApp = functionalComponent<WebAppProps> { props ->
     val (state, setState) = useState(WebAppState(null))
-    useEffect(listOf(state.appState)) {
+    useEffect(listOf()) {
         CoroutineScope(Dispatchers.Main).launch {
             props.application.appState.collect { appState ->
-                console.log("Updating App State for screen: " + appState.navigationState?.screenType + " with: " + (appState.screenViewModel as CounterViewModel).counter)
                 setState(WebAppState(appState))
             }
         }
     }
     div {
+        state.appState?.appBarState?.let {
+            styledDiv {
+                css {
+                    width = 100.vw
+                    height = 8.vh
+                }
+                child(AppBar) {
+                    attrs {
+                        appBarState = it
+                    }
+                }
+            }
+        }
         state.appState?.screenViewModel?.let { screenViewModel ->
             child(Screen) {
                 attrs {

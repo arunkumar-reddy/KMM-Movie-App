@@ -1,8 +1,10 @@
 import com.arun.moviedb.sdk.dispatcher.ActionDispatcher
 import com.arun.moviedb.sdk.viewmodels.counter.CounterViewModel
 import com.arun.moviedb.sdk.viewmodels.ViewModel
+import com.arun.moviedb.sdk.viewmodels.home.HomeScreenViewModel
 import react.*
-import screens.CounterScreen
+import screens.counter.CounterScreen
+import screens.home.HomeScreen
 
 external interface ScreenProps: RProps {
     var viewModel: ViewModel
@@ -15,7 +17,15 @@ val Screen = functionalComponent<ScreenProps> { props ->
             child(CounterScreen) {
                 attrs {
                     counterViewModel = props.viewModel as CounterViewModel
-                    actionDispatcher = props.actionDispatcher
+                    dispatcher = props.actionDispatcher
+                }
+            }
+        }
+        is HomeScreenViewModel -> {
+            child(HomeScreen) {
+                attrs {
+                    homeScreenViewModel = props.viewModel as HomeScreenViewModel
+                    dispatcher = props.actionDispatcher
                 }
             }
         }
