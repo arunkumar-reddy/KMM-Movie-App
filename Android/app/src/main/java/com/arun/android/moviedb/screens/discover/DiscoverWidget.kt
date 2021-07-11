@@ -24,7 +24,8 @@ fun DiscoverWidget(title: String, data: List<DiscoverResult>) {
         Row(modifier = Modifier.padding(top = 16.dp).horizontalScroll(rememberScrollState())) {
             data.forEach { discoverResult ->
                 Column(modifier = Modifier.width(100.dp)) {
-                    Text(text = discoverResult.title, fontSize = 15.sp, color = ColorUtils.getColorFromHex("#000000"))
+                    val text = discoverResult.title ?: discoverResult.name ?: ""
+                    Text(text = text, fontSize = 15.sp, color = ColorUtils.getColorFromHex("#000000"))
                 }
             }
         }

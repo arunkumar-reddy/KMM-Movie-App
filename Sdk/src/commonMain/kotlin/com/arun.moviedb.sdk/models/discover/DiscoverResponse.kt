@@ -13,20 +13,24 @@ data class DiscoverSuccess(
 
 @Serializable
 data class DiscoverResult(
-    @SerialName("poster_path") val posterPath: String?,
-    val adult: Boolean,
+    @SerialName("poster_path") val posterPath: String? = null,
+    val adult: Boolean? = null,
     val overview: String,
     val id: Int,
-    @SerialName("release_date") val releaseDate: String,
-    @SerialName("genre_ids") val genreIds: List<Int>,
-    @SerialName("original_title") val originalTitle: String,
-    @SerialName("original_language") val originalLanguage: String,
-    val title: String,
+    @SerialName("release_date") val releaseDate: String? = null,
+    @SerialName("genre_ids") val genreIds: List<Int>? = null,
+    @SerialName("original_title") val originalTitle: String? = null,
+    @SerialName("original_language") val originalLanguage: String? = null,
+    @SerialName("original_name") val originalName: String? = null,
+    @SerialName("origin_country") val originCountry: List<String>? = null,
+    val title: String? = null,
+    val name: String? = null,
     @SerialName("backdrop_path") val backdropPath: String?,
     val popularity: Double,
-    @SerialName("vote_count") val voteCount: Int,
-    @SerialName("vote_average") val voteAverage: Double,
-    val video: Boolean
+    @SerialName("vote_count") val voteCount: Int? = null,
+    @SerialName("vote_average") val voteAverage: Double? = null,
+    @SerialName("first_air_date") val firstAirDate: String? = null,
+    val video: Boolean? = null
 )
 
 @Serializable
