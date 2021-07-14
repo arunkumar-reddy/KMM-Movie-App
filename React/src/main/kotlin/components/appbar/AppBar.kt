@@ -12,13 +12,15 @@ external interface AppBarProps: RProps {
 val AppBar = functionalComponent<AppBarProps> { props ->
     styledDiv {
         css {
-            backgroundColor = Color(props.appBarState.appBarTextColor)
+            backgroundColor = Color(props.appBarState.appBarColor)
+            display = Display.flex
         }
         styledP {
             css {
-                padding(10.px)
+                paddingLeft = 20.px
                 color = Color(props.appBarState.appBarTextColor)
-                fontSize = 5.em
+                fontSize = 50.px
+                alignItems = Align.center
             }
             +props.appBarState.title
         }

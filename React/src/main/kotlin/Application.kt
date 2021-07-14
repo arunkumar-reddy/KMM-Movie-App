@@ -8,10 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import kotlinx.css.height
-import kotlinx.css.vh
-import kotlinx.css.vw
-import kotlinx.css.width
+import kotlinx.css.*
 import react.*
 import react.dom.div
 import styled.css
@@ -50,6 +47,7 @@ val WebApp = functionalComponent<WebAppProps> { props ->
                 css {
                     width = 100.vw
                     height = 8.vh
+                    overflow = Overflow.hidden
                 }
                 child(AppBar) {
                     attrs {
@@ -59,10 +57,16 @@ val WebApp = functionalComponent<WebAppProps> { props ->
             }
         }
         state.appState?.screenViewModel?.let { screenViewModel ->
-            child(Screen) {
-                attrs {
-                    viewModel = screenViewModel
-                    actionDispatcher = props.application
+            styledDiv {
+                css {
+                    width = 100.vw
+                    height = 80.vh
+                }
+                child(Screen) {
+                    attrs {
+                        viewModel = screenViewModel
+                        actionDispatcher = props.application
+                    }
                 }
             }
         }

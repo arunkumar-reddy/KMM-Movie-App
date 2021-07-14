@@ -6,9 +6,13 @@ import com.arun.moviedb.sdk.dispatcher.actions.ActionTypes
 import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationAction
 import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationType
 import com.arun.moviedb.sdk.viewmodels.counter.CounterViewModel
+import kotlinx.css.*
 import kotlinx.html.js.onClickFunction
 import react.*
 import react.dom.*
+import styled.css
+import styled.styledButton
+import styled.styledDiv
 
 external interface CounterScreenProps: RProps {
     var counterViewModel: CounterViewModel
@@ -16,31 +20,58 @@ external interface CounterScreenProps: RProps {
 }
 
 val CounterScreen = functionalComponent<CounterScreenProps> { props ->
-    div {
+    styledDiv {
+        css {
+            fontSize = 30.px
+            margin(20.px)
+        }
         +"The Current Count is: ${props.counterViewModel.counter}"
     }
-    button {
-        attrs {
-            onClickFunction = {
-                props.dispatcher.dispatch(Action(ActionTypes.INCREMENT_COUNTER))
-            }
-            +"Increment Counter"
+    styledDiv {
+        css {
+            marginTop = 10.px
         }
-    }
-    button {
-        attrs {
-            onClickFunction = {
-                props.dispatcher.dispatch(Action(ActionTypes.DECREMENT_COUNTER))
+        styledButton  {
+            css {
+                width = 20.vw
+                height = 5.vh
+                fontSize = 30.px
             }
-            +"Decrement Counter"
+            attrs {
+                onClickFunction = {
+                    props.dispatcher.dispatch(Action(ActionTypes.INCREMENT_COUNTER))
+                }
+                +"Increment Counter"
+            }
         }
-    }
-    button {
-        attrs {
-            onClickFunction = {
-                props.dispatcher.dispatch(NavigationAction(NavigationType.FORWARD, "/home"))
+        styledButton {
+            css {
+                width = 20.vw
+                height = 5.vh
+                fontSize = 30.px
+                marginLeft = 20.px
             }
-            +"Submit"
+            attrs {
+                onClickFunction = {
+                    props.dispatcher.dispatch(Action(ActionTypes.DECREMENT_COUNTER))
+                }
+                +"Decrement Counter"
+            }
+        }
+        styledButton {
+            css {
+                width = 20.vw
+                height = 5.vh
+                fontSize = 30.px
+                marginTop = 20.px
+                marginLeft = 20.px
+            }
+            attrs {
+                onClickFunction = {
+                    props.dispatcher.dispatch(NavigationAction(NavigationType.FORWARD, "/home"))
+                }
+                +"Submit"
+            }
         }
     }
 }
