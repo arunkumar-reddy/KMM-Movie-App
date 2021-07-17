@@ -16,7 +16,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlin.js.JsExport
 
+@JsExport
 class Application(private val initState: AppState? = null): ActionDispatcher {
     private val _mutableAppState = MutableStateFlow(AppState(
         appBarState = AppBarState(),
