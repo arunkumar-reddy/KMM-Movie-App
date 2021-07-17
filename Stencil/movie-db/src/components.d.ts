@@ -5,12 +5,10 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { MatchResults } from "@stencil/router";
 export namespace Components {
     interface AppHome {
     }
     interface AppProfile {
-        "match": MatchResults;
     }
     interface AppRoot {
     }
@@ -44,7 +42,6 @@ declare namespace LocalJSX {
     interface AppHome {
     }
     interface AppProfile {
-        "match"?: MatchResults;
     }
     interface AppRoot {
     }
