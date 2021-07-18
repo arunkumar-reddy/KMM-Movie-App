@@ -1,8 +1,12 @@
 package com.arun.moviedb.sdk.navigation
 
 import com.arun.moviedb.sdk.screen.ScreenTypes
+import kotlin.js.JsName
 
-class NavigationState(val screenName: String, val screenType: ScreenTypes)
+data class NavigationState(
+    @JsName("screenName") val screenName: String,
+    @JsName("screenType") val screenType: ScreenTypes
+)
 
 interface Navigator {
     fun navigateTo(screenName: String)

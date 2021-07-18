@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "com.arun.moviedb.sdk"
-version = "1.0.1-SNAPSHOT"
+version = "1.0.2-SNAPSHOT"
 
 repositories {
     google()
