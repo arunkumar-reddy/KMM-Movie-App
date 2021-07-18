@@ -45,7 +45,11 @@ export class AppContainer {
 
     renderScreen(screenType: any, screenViewModel: any) {
         return (
-            <app-screen screenType={screenType} screenViewModel={screenViewModel}/>
+            <app-screen 
+                screenType={screenType} 
+                screenViewModel={screenViewModel}
+                dispatcher={this.application}
+            />
         )
     }
 }

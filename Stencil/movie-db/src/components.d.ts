@@ -15,8 +15,10 @@ export namespace Components {
     }
     interface AppCounterScreen {
         "counterViewModel": any;
+        "dispatcher": any;
     }
     interface AppScreen {
+        "dispatcher": any;
         "screenType": any;
         "screenViewModel": any;
     }
@@ -63,8 +65,10 @@ declare namespace LocalJSX {
     }
     interface AppCounterScreen {
         "counterViewModel"?: any;
+        "dispatcher"?: any;
     }
     interface AppScreen {
+        "dispatcher"?: any;
         "screenType"?: any;
         "screenViewModel"?: any;
     }
