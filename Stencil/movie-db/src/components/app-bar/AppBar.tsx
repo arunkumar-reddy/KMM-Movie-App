@@ -1,16 +1,20 @@
-import { Component, h } from '@stencil/core';
+import { Component, Prop, h } from '@stencil/core';
 
 @Component({
-  tag: 'app-bar',
-  styleUrl: 'AppBar.css',
-  shadow: true,
+    tag: 'app-bar',
+    styleUrl: 'AppBar.css',
+    shadow: true,
 })
 export class AppBar {
-  render() {
-    return (
-      <header>
-        <h1>Stencil App Starter</h1>
-      </header>
-    );
-  }
+    @Prop() appBarTitle: string;
+    @Prop() appBarColor: string;
+    @Prop() appBarTextColor: string;
+
+    render() {
+        return (
+            <header style={{ background: this.appBarColor }}>
+                <h1 style={{ color: this.appBarTextColor }}>{this.appBarTitle}</h1>
+            </header>
+        );
+    }
 }

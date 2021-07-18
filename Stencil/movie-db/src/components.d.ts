@@ -7,8 +7,18 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface AppBar {
+        "appBarColor": string;
+        "appBarTextColor": string;
+        "appBarTitle": string;
     }
     interface AppContainer {
+    }
+    interface AppCounterScreen {
+        "counterViewModel": any;
+    }
+    interface AppScreen {
+        "screenType": any;
+        "screenViewModel": any;
     }
 }
 declare global {
@@ -24,19 +34,45 @@ declare global {
         prototype: HTMLAppContainerElement;
         new (): HTMLAppContainerElement;
     };
+    interface HTMLAppCounterScreenElement extends Components.AppCounterScreen, HTMLStencilElement {
+    }
+    var HTMLAppCounterScreenElement: {
+        prototype: HTMLAppCounterScreenElement;
+        new (): HTMLAppCounterScreenElement;
+    };
+    interface HTMLAppScreenElement extends Components.AppScreen, HTMLStencilElement {
+    }
+    var HTMLAppScreenElement: {
+        prototype: HTMLAppScreenElement;
+        new (): HTMLAppScreenElement;
+    };
     interface HTMLElementTagNameMap {
         "app-bar": HTMLAppBarElement;
         "app-container": HTMLAppContainerElement;
+        "app-counter-screen": HTMLAppCounterScreenElement;
+        "app-screen": HTMLAppScreenElement;
     }
 }
 declare namespace LocalJSX {
     interface AppBar {
+        "appBarColor"?: string;
+        "appBarTextColor"?: string;
+        "appBarTitle"?: string;
     }
     interface AppContainer {
+    }
+    interface AppCounterScreen {
+        "counterViewModel"?: any;
+    }
+    interface AppScreen {
+        "screenType"?: any;
+        "screenViewModel"?: any;
     }
     interface IntrinsicElements {
         "app-bar": AppBar;
         "app-container": AppContainer;
+        "app-counter-screen": AppCounterScreen;
+        "app-screen": AppScreen;
     }
 }
 export { LocalJSX as JSX };
@@ -45,6 +81,8 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "app-bar": LocalJSX.AppBar & JSXBase.HTMLAttributes<HTMLAppBarElement>;
             "app-container": LocalJSX.AppContainer & JSXBase.HTMLAttributes<HTMLAppContainerElement>;
+            "app-counter-screen": LocalJSX.AppCounterScreen & JSXBase.HTMLAttributes<HTMLAppCounterScreenElement>;
+            "app-screen": LocalJSX.AppScreen & JSXBase.HTMLAttributes<HTMLAppScreenElement>;
         }
     }
 }
