@@ -11,5 +11,5 @@ enum class NavigationType {
 
 data class NavigationAction(
     val navigationType: NavigationType,
-    val screenName: String? = null
+    val screenName: String
 ): Action(ActionTypes.NAVIGATE)

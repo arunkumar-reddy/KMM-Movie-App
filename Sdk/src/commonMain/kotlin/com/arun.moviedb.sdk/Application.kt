@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlin.js.JsExport
+import kotlin.js.JsName
 
 @JsExport
 class Application(val updateAppState: (appState: AppState) -> Unit, private val initState: AppState? = null): ActionDispatcher {
@@ -47,6 +48,11 @@ class Application(val updateAppState: (appState: AppState) -> Unit, private val 
                 }
             }
         }
+    }
+
+    @JsName("dispatch")
+    fun dispatchAction(action: Action) {
+        dispatch(action)
     }
 
     private suspend fun getMutableStateWithLock(updateState: (MutableStateFlow<AppState>) -> Unit) {
