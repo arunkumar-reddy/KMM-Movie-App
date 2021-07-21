@@ -1,0 +1,12 @@
+.screenContainer {
+    flex-direction: 'column';
+    margin-left: 10px;
+}
+
+.buttonsContainer {
+    flex-direction: 'row';
+}
+
+button {
+    margin-left: 10px;
+}

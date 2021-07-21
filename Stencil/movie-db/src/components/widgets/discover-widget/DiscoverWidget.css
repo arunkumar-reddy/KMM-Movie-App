@@ -1,0 +1,21 @@
+.title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-left: 10px
+}
+
+.listContainer {
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+    height: 25vh;
+}
+
+.itemContainer {
+    width: 30vw;
+    margin-left: 20px;
+}
+
+.item {
+    font-size: 1.2rem;
+}

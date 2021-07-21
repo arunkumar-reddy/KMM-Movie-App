@@ -14,6 +14,8 @@ export class Screen {
             case 'COUNTER':
                 screen = <app-counter-screen counterViewModel={this.screenViewModel} dispatcher={this.dispatcher}/>
                 break;
+            case 'HOME':
+                screen = <app-home-screen homeScreenViewModel={this.screenViewModel} dispatcher={this.dispatcher}/>
             default:
                 break;
         }

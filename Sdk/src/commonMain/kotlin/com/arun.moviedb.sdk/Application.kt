@@ -51,8 +51,10 @@ class Application(val updateAppState: (appState: AppState) -> Unit, private val 
     }
 
     @JsName("dispatch")
-    fun dispatchAction(action: Action) {
-        dispatch(action)
+    fun dispatchAction(jsAction: dynamic) {
+        ActionMapper.getActionFromJsPayload(jsAction)?.let { action ->
+            dispatch(action)
+        }
     }
 
     private suspend fun getMutableStateWithLock(updateState: (MutableStateFlow<AppState>) -> Unit) {

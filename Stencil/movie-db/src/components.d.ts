@@ -17,6 +17,14 @@ export namespace Components {
         "counterViewModel": any;
         "dispatcher": any;
     }
+    interface AppDiscoverWidget {
+        "data": any[];
+        "name": string;
+    }
+    interface AppHomeScreen {
+        "dispatcher": any;
+        "homeScreenViewModel": any;
+    }
     interface AppScreen {
         "dispatcher": any;
         "screenType": any;
@@ -42,6 +50,18 @@ declare global {
         prototype: HTMLAppCounterScreenElement;
         new (): HTMLAppCounterScreenElement;
     };
+    interface HTMLAppDiscoverWidgetElement extends Components.AppDiscoverWidget, HTMLStencilElement {
+    }
+    var HTMLAppDiscoverWidgetElement: {
+        prototype: HTMLAppDiscoverWidgetElement;
+        new (): HTMLAppDiscoverWidgetElement;
+    };
+    interface HTMLAppHomeScreenElement extends Components.AppHomeScreen, HTMLStencilElement {
+    }
+    var HTMLAppHomeScreenElement: {
+        prototype: HTMLAppHomeScreenElement;
+        new (): HTMLAppHomeScreenElement;
+    };
     interface HTMLAppScreenElement extends Components.AppScreen, HTMLStencilElement {
     }
     var HTMLAppScreenElement: {
@@ -52,6 +72,8 @@ declare global {
         "app-bar": HTMLAppBarElement;
         "app-container": HTMLAppContainerElement;
         "app-counter-screen": HTMLAppCounterScreenElement;
+        "app-discover-widget": HTMLAppDiscoverWidgetElement;
+        "app-home-screen": HTMLAppHomeScreenElement;
         "app-screen": HTMLAppScreenElement;
     }
 }
@@ -67,6 +89,14 @@ declare namespace LocalJSX {
         "counterViewModel"?: any;
         "dispatcher"?: any;
     }
+    interface AppDiscoverWidget {
+        "data"?: any[];
+        "name"?: string;
+    }
+    interface AppHomeScreen {
+        "dispatcher"?: any;
+        "homeScreenViewModel"?: any;
+    }
     interface AppScreen {
         "dispatcher"?: any;
         "screenType"?: any;
@@ -76,6 +106,8 @@ declare namespace LocalJSX {
         "app-bar": AppBar;
         "app-container": AppContainer;
         "app-counter-screen": AppCounterScreen;
+        "app-discover-widget": AppDiscoverWidget;
+        "app-home-screen": AppHomeScreen;
         "app-screen": AppScreen;
     }
 }
@@ -86,6 +118,8 @@ declare module "@stencil/core" {
             "app-bar": LocalJSX.AppBar & JSXBase.HTMLAttributes<HTMLAppBarElement>;
             "app-container": LocalJSX.AppContainer & JSXBase.HTMLAttributes<HTMLAppContainerElement>;
             "app-counter-screen": LocalJSX.AppCounterScreen & JSXBase.HTMLAttributes<HTMLAppCounterScreenElement>;
+            "app-discover-widget": LocalJSX.AppDiscoverWidget & JSXBase.HTMLAttributes<HTMLAppDiscoverWidgetElement>;
+            "app-home-screen": LocalJSX.AppHomeScreen & JSXBase.HTMLAttributes<HTMLAppHomeScreenElement>;
             "app-screen": LocalJSX.AppScreen & JSXBase.HTMLAttributes<HTMLAppScreenElement>;
         }
     }
