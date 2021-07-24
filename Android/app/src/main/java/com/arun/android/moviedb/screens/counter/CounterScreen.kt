@@ -9,11 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.arun.moviedb.sdk.dispatcher.ActionDispatcher
-import com.arun.moviedb.sdk.dispatcher.actions.Action
-import com.arun.moviedb.sdk.dispatcher.actions.ActionTypes
-import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationAction
-import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationType
-import com.arun.moviedb.sdk.screen.ScreenNames
 import com.arun.moviedb.sdk.viewmodels.counter.CounterViewModel
 
 @Composable
@@ -22,13 +17,13 @@ fun CounterScreen(counterViewModel: CounterViewModel, dispatcher: ActionDispatch
         modifier = Modifier.padding(16.dp)
     ) {
         Text("The Current Count is: " + counterViewModel.counter)
-        Button(onClick = { dispatcher.dispatch(Action(ActionTypes.INCREMENT_COUNTER)) }) {
+        Button(onClick = { dispatcher.dispatch(counterViewModel.incrementAction) }) {
             Text("Increment Counter")
         }
-        Button(onClick = { dispatcher.dispatch(Action(ActionTypes.DECREMENT_COUNTER)) }) {
+        Button(onClick = { dispatcher.dispatch(counterViewModel.decrementAction) }) {
             Text("Decrement Counter")
         }
-        Button(onClick = { dispatcher.dispatch(NavigationAction(NavigationType.FORWARD, ScreenNames.HOME)) }) {
+        Button(onClick = { dispatcher.dispatch(counterViewModel.submitAction) }) {
             Text("Submit")
         }
     }
