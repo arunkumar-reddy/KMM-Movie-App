@@ -31,7 +31,7 @@ class NavigationHandler(private val navigator: Navigator): ActionHandler {
                 }
             }
             navigator.getCurrentScreen()?.let { currentScreen ->
-                val viewModel = Router.getViewModelForScreen(currentScreen.screenType)
+                val viewModel = Router.getViewModelForScreen(currentScreen.screenType, currentScreen.screenName)
                 val showBottomBar = showBottomBar(currentScreen.screenName)
                 getMutableState { mutableState ->
                     mutableState.value = mutableState.value.copy(

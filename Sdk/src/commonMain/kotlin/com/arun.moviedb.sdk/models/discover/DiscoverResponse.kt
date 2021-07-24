@@ -2,6 +2,8 @@ package com.arun.moviedb.sdk.models.discover
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.js.JsExport
+import kotlin.js.JsName
 
 @Serializable
 data class DiscoverSuccess(
@@ -11,9 +13,10 @@ data class DiscoverSuccess(
     @SerialName("total_pages") val totalPages: Int
 )
 
+@JsExport
 @Serializable
 data class DiscoverResult(
-    @SerialName("poster_path") val posterPath: String? = null,
+    @SerialName("poster_path") @JsName("posterPath") val posterPath: String? = null,
     val adult: Boolean? = null,
     val overview: String,
     val id: Int,
@@ -23,8 +26,8 @@ data class DiscoverResult(
     @SerialName("original_language") val originalLanguage: String? = null,
     @SerialName("original_name") val originalName: String? = null,
     @SerialName("origin_country") val originCountry: List<String>? = null,
-    val title: String? = null,
-    val name: String? = null,
+    @JsName("title") val title: String? = null,
+    @JsName("name") val name: String? = null,
     @SerialName("backdrop_path") val backdropPath: String?,
     val popularity: Double,
     @SerialName("vote_count") val voteCount: Int? = null,

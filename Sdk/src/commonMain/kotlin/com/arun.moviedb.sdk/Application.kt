@@ -17,7 +17,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlin.js.JsExport
-import kotlin.js.JsName
 
 @JsExport
 class Application(val updateAppState: (appState: AppState) -> Unit, private val initState: AppState? = null): ActionDispatcher {
@@ -47,13 +46,6 @@ class Application(val updateAppState: (appState: AppState) -> Unit, private val 
                     getMutableStateWithLock(it)
                 }
             }
-        }
-    }
-
-    @JsName("dispatch")
-    fun dispatchAction(jsAction: dynamic) {
-        ActionMapper.getActionFromJsPayload(jsAction)?.let { action ->
-            dispatch(action)
         }
     }
 

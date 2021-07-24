@@ -2,7 +2,6 @@ package com.arun.moviedb.sdk.dispatcher
 
 import com.arun.moviedb.sdk.dispatcher.actions.Action
 import com.arun.moviedb.sdk.dispatcher.actions.ActionTypes
-import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationActionBuilder
 import com.arun.moviedb.sdk.handlers.ActionHandler
 import com.arun.moviedb.sdk.handlers.counter.CounterActionHandler
 import com.arun.moviedb.sdk.handlers.home.HomeScreenLoadHandler
@@ -18,18 +17,5 @@ object ActionMapper {
             ActionTypes.INCREMENT_COUNTER, ActionTypes.DECREMENT_COUNTER -> listOf(CounterActionHandler())
             ActionTypes.LOAD_HOME_SCREEN -> listOf(HomeScreenLoadHandler())
         }
-    }
-
-    fun getActionFromJsPayload(jsObject: dynamic): Action? {
-        val type = jsObject["type"] as String?
-        type?.let {
-            return when (ActionTypes.valueOf(type)) {
-                ActionTypes.INCREMENT_COUNTER -> Action(ActionTypes.INCREMENT_COUNTER)
-                ActionTypes.DECREMENT_COUNTER -> Action(ActionTypes.DECREMENT_COUNTER)
-                ActionTypes.NAVIGATE -> NavigationActionBuilder().buildAction(ActionTypes.NAVIGATE, jsObject)
-                ActionTypes.LOAD_HOME_SCREEN -> Action(ActionTypes.LOAD_HOME_SCREEN)
-            }
-        }
-        return null
     }
 }

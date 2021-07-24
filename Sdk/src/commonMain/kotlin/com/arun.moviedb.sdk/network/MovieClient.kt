@@ -48,6 +48,18 @@ class MovieClient {
         return fetchData(DISCOVER_TV_PATH, queryParams)
     }
 
+    suspend fun getMoviesForQuery(query: String): DiscoverResponse {
+        val queryParams = createQueryParams()
+        queryParams["query"] = query
+        return fetchData(SEARCH_MOVIE_PATH, queryParams)
+    }
+
+    suspend fun getTvShowsForQuery(query: String): DiscoverResponse {
+        val queryParams = createQueryParams()
+        queryParams["query"] = query
+        return fetchData(SEARCH_TV_PATH, queryParams)
+    }
+
     private suspend fun fetchData(path: String, queryParams: Map<String, String>? = null): DiscoverResponse {
         return try {
             val response: HttpResponse = client.get(RequestBuilder.createRequestUrl(API, path, queryParams))
@@ -72,6 +84,8 @@ class MovieClient {
         const val API_KEY = "def588ca30d1e24ad80f41e04197ec3f"
         const val DISCOVER_MOVIE_PATH = "3/discover/movie"
         const val DISCOVER_TV_PATH = "3/discover/tv"
+        const val SEARCH_MOVIE_PATH = "3/search/movie"
+        const val SEARCH_TV_PATH = "3/search/tv"
 
         private val movieClient: MovieClient by lazy { MovieClient() }
 

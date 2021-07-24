@@ -3,10 +3,14 @@ package com.arun.moviedb.sdk.handlers.home
 import com.arun.moviedb.sdk.AppState
 import com.arun.moviedb.sdk.dispatcher.ActionDispatcher
 import com.arun.moviedb.sdk.dispatcher.actions.Action
+import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationAction
+import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationType
 import com.arun.moviedb.sdk.handlers.ActionHandler
+import com.arun.moviedb.sdk.models.actionable.ActionableDiscoverResult
 import com.arun.moviedb.sdk.models.discover.DiscoverResponse
 import com.arun.moviedb.sdk.models.discover.DiscoverResult
 import com.arun.moviedb.sdk.network.MovieClient
+import com.arun.moviedb.sdk.screen.ScreenNames
 import com.arun.moviedb.sdk.viewmodels.home.HomeScreenViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,11 +42,11 @@ class HomeScreenLoadHandler: ActionHandler {
 
                 val homeScreenViewModel = HomeScreenViewModel(
                     true,
-                    popularMovies = popularMovies,
-                    regionalMovies = regionalMovies,
-                    latestMovies = latestMovies,
-                    popularTvShows = popularTvShows,
-                    latestTvShows = latestTvShows
+                    popularMovies = convertToActionableResults(popularMovies),
+                    regionalMovies = convertToActionableResults(regionalMovies),
+                    latestMovies = convertToActionableResults(latestMovies),
+                    popularTvShows = convertToActionableResults(popularTvShows),
+                    latestTvShows = convertToActionableResults(latestTvShows)
                 )
                 getMutableState { mutableState ->
                     mutableState.value = mutableState.value.copy(screenViewModel = homeScreenViewModel)
@@ -55,6 +59,15 @@ class HomeScreenLoadHandler: ActionHandler {
         return when(response) {
             is DiscoverResponse.Success -> response.success.results
             is DiscoverResponse.Error -> null
+        }
+    }
+
+    private fun convertToActionableResults(results: List<DiscoverResult>?): List<ActionableDiscoverResult>? {
+        return results?.map { result ->
+            val screenName = ScreenNames.ITEM + "/" + result.id.toString()
+            val params = mapOf("data" to result)
+            val action = NavigationAction(NavigationType.FORWARD, screenName, params)
+            ActionableDiscoverResult(result = result, action = action)
         }
     }
 }
