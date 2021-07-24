@@ -3,14 +3,9 @@ package com.arun.moviedb.sdk.handlers.home
 import com.arun.moviedb.sdk.AppState
 import com.arun.moviedb.sdk.dispatcher.ActionDispatcher
 import com.arun.moviedb.sdk.dispatcher.actions.Action
-import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationAction
-import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationType
 import com.arun.moviedb.sdk.handlers.ActionHandler
-import com.arun.moviedb.sdk.models.actionable.ActionableDiscoverResult
-import com.arun.moviedb.sdk.models.discover.DiscoverResponse
-import com.arun.moviedb.sdk.models.discover.DiscoverResult
 import com.arun.moviedb.sdk.network.MovieClient
-import com.arun.moviedb.sdk.screen.ScreenNames
+import com.arun.moviedb.sdk.utils.ResponseUtils
 import com.arun.moviedb.sdk.viewmodels.home.HomeScreenViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,46 +23,30 @@ class HomeScreenLoadHandler: ActionHandler {
         if (state.screenViewModel is HomeScreenViewModel) {
             CoroutineScope(Dispatchers.Default).launch {
                 val client = MovieClient.getInstance()
-                val popularMoviesData = async { client.getMostPopularMovies() }
-                val regionalMoviesData = async { client.getMoviesByRegion() }
-                val latestMoviesData = async { client.getLatestMovies() }
-                val popularTvShowsData = async { client.getMostPopularTvShows() }
-                val latestTvShowsData = async { client.getLatestTvShows() }
+                val popularMoviesRequest = async { client.getMostPopularMovies() }
+                val regionalMoviesRequest = async { client.getMoviesByRegion() }
+                val latestMoviesRequest = async { client.getLatestMovies() }
+                val popularTvShowsRequest = async { client.getMostPopularTvShows() }
+                val latestTvShowsRequest = async { client.getLatestTvShows() }
 
-                val popularMovies = processResponse(popularMoviesData.await())
-                val latestMovies = processResponse(latestMoviesData.await())
-                val regionalMovies = processResponse(regionalMoviesData.await())
-                val popularTvShows = processResponse(popularTvShowsData.await())
-                val latestTvShows = processResponse(latestTvShowsData.await())
+                val popularMovies = ResponseUtils.processResponse(popularMoviesRequest.await())
+                val latestMovies = ResponseUtils.processResponse(latestMoviesRequest.await())
+                val regionalMovies = ResponseUtils.processResponse(regionalMoviesRequest.await())
+                val popularTvShows = ResponseUtils.processResponse(popularTvShowsRequest.await())
+                val latestTvShows = ResponseUtils.processResponse(latestTvShowsRequest.await())
 
                 val homeScreenViewModel = HomeScreenViewModel(
                     true,
-                    popularMovies = convertToActionableResults(popularMovies),
-                    regionalMovies = convertToActionableResults(regionalMovies),
-                    latestMovies = convertToActionableResults(latestMovies),
-                    popularTvShows = convertToActionableResults(popularTvShows),
-                    latestTvShows = convertToActionableResults(latestTvShows)
+                    popularMovies = ResponseUtils.convertToActionableResults(popularMovies),
+                    regionalMovies = ResponseUtils.convertToActionableResults(regionalMovies),
+                    latestMovies = ResponseUtils.convertToActionableResults(latestMovies),
+                    popularTvShows = ResponseUtils.convertToActionableResults(popularTvShows),
+                    latestTvShows = ResponseUtils.convertToActionableResults(latestTvShows)
                 )
                 getMutableState { mutableState ->
                     mutableState.value = mutableState.value.copy(screenViewModel = homeScreenViewModel)
                 }
             }
-        }
-    }
-
-    private fun processResponse(response: DiscoverResponse): List<DiscoverResult>? {
-        return when(response) {
-            is DiscoverResponse.Success -> response.success.results
-            is DiscoverResponse.Error -> null
-        }
-    }
-
-    private fun convertToActionableResults(results: List<DiscoverResult>?): List<ActionableDiscoverResult>? {
-        return results?.map { result ->
-            val screenName = ScreenNames.ITEM + "/" + result.id.toString()
-            val params = mapOf("data" to result)
-            val action = NavigationAction(NavigationType.FORWARD, screenName, params)
-            ActionableDiscoverResult(result = result, action = action)
         }
     }
 }

@@ -5,4 +5,5 @@ enum class ActionTypes {
     DECREMENT_COUNTER,
     NAVIGATE,
     LOAD_HOME_SCREEN,
+    SEARCH_QUERY
 }

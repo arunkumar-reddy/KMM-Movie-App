@@ -28,9 +28,9 @@ data class BottomBarState(
 
 object BottomBarBuilder {
     private val bottomBarItems = listOf<BottomBarItem>(
-        BottomBarItem(title = "Home", screenName = ScreenNames.HOME, action = NavigationAction(NavigationType.REPLACE, ScreenNames.HOME)),
-        BottomBarItem(title = "Search", screenName = ScreenNames.HOME, action = NavigationAction(NavigationType.REPLACE, ScreenNames.SEARCH)),
-        BottomBarItem(title = "Favorites", screenName = ScreenNames.HOME, action = NavigationAction(NavigationType.REPLACE, ScreenNames.FAVORITES))
+        BottomBarItem(title = "Home", screenName = ScreenNames.HOME, action = NavigationAction(NavigationType.FORWARD, ScreenNames.HOME)),
+        BottomBarItem(title = "Search", screenName = ScreenNames.HOME, action = NavigationAction(NavigationType.FORWARD, ScreenNames.SEARCH)),
+        BottomBarItem(title = "Favorites", screenName = ScreenNames.HOME, action = NavigationAction(NavigationType.FORWARD, ScreenNames.FAVORITES))
     )
 
     fun getBottomBarItems(): List<BottomBarItem> {

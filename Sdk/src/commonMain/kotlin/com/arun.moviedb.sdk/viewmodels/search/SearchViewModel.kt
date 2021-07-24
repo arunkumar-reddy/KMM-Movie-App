@@ -9,6 +9,10 @@ class SearchViewModel(
     val query: String,
     @JsName("hasDataLoaded")
     val hasDataLoaded: Boolean = false,
-    @JsName("searchResults")
-    val searchResults: List<ActionableDiscoverResult>? = null
+    @JsName("showMovieToggle")
+    val showMovieToggle: Boolean = true,
+    @JsName("movieSearchResults")
+    val movieSearchResults: List<ActionableDiscoverResult>? = null,
+    @JsName("tvSearchResults")
+    val tvSearchResults: List<ActionableDiscoverResult>? = null
 ): ViewModel
