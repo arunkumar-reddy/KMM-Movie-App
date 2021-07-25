@@ -37,17 +37,18 @@ class NavigationHandler(private val navigator: Navigator): ActionHandler {
                     mutableState.value = mutableState.value.copy(
                         navigationState = currentScreen,
                         screenViewModel = viewModel,
-                        bottomBarState = mutableState.value.bottomBarState?.copy(showBottomBar = showBottomBar)
+                        bottomBarState = mutableState.value.bottomBarState?.copy(showBottomBar = showBottomBar.first, selectedIndex = showBottomBar.second)
                     )
                 }
             }
         }
     }
 
-    private fun showBottomBar(screenName: String): Boolean {
-        for (bottomBarItem in BottomBarBuilder.getBottomBarItems()) {
-            if (screenName == bottomBarItem.screenName) return true
+    private fun showBottomBar(screenName: String): Pair<Boolean, Int> {
+        val bottomBarItems = BottomBarBuilder.getBottomBarItems()
+        for (i in bottomBarItems.indices) {
+            if (screenName == bottomBarItems[i].screenName) return Pair(true, i)
         }
-        return false
+        return Pair(false, -1)
     }
 }

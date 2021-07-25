@@ -1,6 +1,5 @@
 package com.arun.moviedb.sdk.dispatcher
 
-import com.arun.moviedb.sdk.dispatcher.actions.Action
 import com.arun.moviedb.sdk.dispatcher.actions.ActionTypes
 import com.arun.moviedb.sdk.handlers.ActionHandler
 import com.arun.moviedb.sdk.handlers.counter.CounterActionHandler

@@ -22,15 +22,17 @@ data class BottomBarItem(
 data class BottomBarState(
     @JsName("showBottomBar")
     val showBottomBar: Boolean,
+    @JsName("selectedIndex")
+    val selectedIndex: Int,
     @JsName("bottomBarItems")
     val bottomBarItems: List<BottomBarItem>
 )
 
 object BottomBarBuilder {
-    private val bottomBarItems = listOf<BottomBarItem>(
+    private val bottomBarItems = listOf(
         BottomBarItem(title = "Home", screenName = ScreenNames.HOME, action = NavigationAction(NavigationType.FORWARD, ScreenNames.HOME)),
-        BottomBarItem(title = "Search", screenName = ScreenNames.HOME, action = NavigationAction(NavigationType.FORWARD, ScreenNames.SEARCH)),
-        BottomBarItem(title = "Favorites", screenName = ScreenNames.HOME, action = NavigationAction(NavigationType.FORWARD, ScreenNames.FAVORITES))
+        BottomBarItem(title = "Search", screenName = ScreenNames.SEARCH, action = NavigationAction(NavigationType.FORWARD, ScreenNames.SEARCH)),
+        BottomBarItem(title = "Favorites", screenName = ScreenNames.FAVORITES, action = NavigationAction(NavigationType.FORWARD, ScreenNames.FAVORITES))
     )
 
     fun getBottomBarItems(): List<BottomBarItem> {

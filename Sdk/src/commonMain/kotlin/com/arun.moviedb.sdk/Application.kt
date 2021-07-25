@@ -22,7 +22,7 @@ import kotlin.js.JsExport
 class Application(val updateAppState: (appState: AppState) -> Unit, private val initState: AppState? = null): ActionDispatcher {
     private val mutableAppState = MutableStateFlow(AppState(
         appBarState = AppBarState(),
-        bottomBarState = BottomBarState(showBottomBar = true, bottomBarItems = BottomBarBuilder.getBottomBarItems())
+        bottomBarState = BottomBarState(showBottomBar = true, selectedIndex = 0, bottomBarItems = BottomBarBuilder.getBottomBarItems())
     ))
     private val actionHandlerLock = Mutex()
 

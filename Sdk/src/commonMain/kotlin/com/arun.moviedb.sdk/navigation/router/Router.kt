@@ -31,11 +31,11 @@ object Router {
         return null
     }
 
-    fun getViewModelForScreen(screenType: ScreenTypes, screenName: String): ViewModel? {
+    fun getViewModelForScreen(screenType: ScreenTypes, screenName: String): ViewModel {
         return when (screenType) {
             ScreenTypes.COUNTER -> CounterViewModel()
             ScreenTypes.HOME -> HomeScreenViewModel()
-            ScreenTypes.BROWSE -> ScreenUtils.getSearchQueryFromScreenName(screenName)?.let{ SearchViewModel(query = it) }
+            ScreenTypes.BROWSE -> SearchViewModel(query = ScreenUtils.getSearchQueryFromScreenName(screenName))
             else -> CounterViewModel()
         }
     }

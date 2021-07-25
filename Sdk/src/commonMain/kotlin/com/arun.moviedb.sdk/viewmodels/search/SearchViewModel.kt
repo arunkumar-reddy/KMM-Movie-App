@@ -6,7 +6,7 @@ import kotlin.js.JsName
 
 class SearchViewModel(
     @JsName("query")
-    val query: String,
+    val query: String? = null,
     @JsName("hasDataLoaded")
     val hasDataLoaded: Boolean = false,
     @JsName("showMovieToggle")
