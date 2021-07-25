@@ -1,6 +1,7 @@
 package com.arun.android.moviedb.components.bottombar
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -10,19 +11,26 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.arun.android.moviedb.utils.ColorUtils
+import com.arun.moviedb.sdk.dispatcher.ActionDispatcher
 import com.arun.moviedb.sdk.viewmodels.bottombar.BottomBarItem
 import com.arun.moviedb.sdk.viewmodels.bottombar.BottomBarState
 
 @Composable
-fun BottomBar(bottomBar: BottomBarState) {
+fun BottomBar(bottomBar: BottomBarState, dispatcher: ActionDispatcher) {
     if (bottomBar.showBottomBar) {
-        Row(modifier = Modifier.background(ColorUtils.getColorFromHex("#171717")).fillMaxWidth().height(75.dp)) {
-            bottomBar.bottomBarItems.forEach {
+        Row(modifier = Modifier.fillMaxWidth().height(75.dp)) {
+            bottomBar.bottomBarItems.forEachIndexed { index, item ->
+                val backgroundColor = if (index == bottomBar.selectedIndex)  "#FFC107" else "#171717"
+                val textColor = if (index == bottomBar.selectedIndex)  "#171717" else "#FFC107"
                 Column(
-                    modifier = Modifier.weight(1f).align(Alignment.CenterVertically),
+                    modifier = Modifier.weight(1f).align(Alignment.CenterVertically)
+                        .fillMaxHeight()
+                        .align(Alignment.CenterVertically)
+                        .background(ColorUtils.getColorFromHex(backgroundColor))
+                        .clickable { handleBottomBarItemClick(index, bottomBar, dispatcher) },
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    BottomBarItem(bottomBarItem = it)
+                    BottomBarItem(bottomBarItem = item, color = textColor)
                 }
             }
         }
@@ -30,11 +38,17 @@ fun BottomBar(bottomBar: BottomBarState) {
 }
 
 @Composable
-fun BottomBarItem(bottomBarItem: BottomBarItem) {
+fun BottomBarItem(bottomBarItem: BottomBarItem, color: String) {
     Text(
         text = bottomBarItem.title,
-        color = ColorUtils.getColorFromHex("#FFC107"),
+        color = ColorUtils.getColorFromHex(color),
         fontSize = 20.sp,
         textAlign = TextAlign.Center
     )
+}
+
+private fun handleBottomBarItemClick(index: Int, bottomBarState: BottomBarState, dispatcher: ActionDispatcher) {
+    if (index != bottomBarState.selectedIndex) {
+        dispatcher.dispatch(bottomBarState.bottomBarItems[index].action)
+    }
 }

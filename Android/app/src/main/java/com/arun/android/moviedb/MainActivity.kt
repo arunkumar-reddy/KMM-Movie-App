@@ -13,9 +13,10 @@ import com.arun.android.moviedb.components.bottombar.BottomBar
 import com.arun.android.moviedb.screens.Screen
 import com.arun.moviedb.sdk.AppState
 import com.arun.moviedb.sdk.Application
+import com.arun.moviedb.sdk.dispatcher.ActionDispatcher
 
 class MainActivity : ComponentActivity() {
-    var application: Application? = null
+    private var application: Application? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,11 +46,11 @@ class MainActivity : ComponentActivity() {
             }
             Column(modifier = Modifier.weight(9f)) {
                 state?.screenViewModel?.let { viewModel ->
-                    Screen(viewModel, application as Application)
+                    Screen(viewModel, application as ActionDispatcher)
                 }
             }
             state?.bottomBarState?.let { bottomBar ->
-                Column(modifier = Modifier.weight(1f)) { BottomBar(bottomBar) }
+                Column(modifier = Modifier.weight(1f)) { BottomBar(bottomBar, application as ActionDispatcher) }
             }
         }
     }

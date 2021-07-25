@@ -21,22 +21,23 @@ class SearchActionHandler: ActionHandler {
         getMutableState: suspend ((MutableStateFlow<AppState>) -> Unit) -> Unit
     ) {
         if (state.screenViewModel is SearchViewModel) {
-            CoroutineScope(Dispatchers.Default).launch {
-                val query = state.screenViewModel.query
-                val client = MovieClient.getInstance()
-                val movieSearchRequest = async { client.getMoviesForQuery(query) }
-                val tvSearchRequest = async { client.getTvShowsForQuery(query) }
+            state.screenViewModel.query?.let { query ->
+                CoroutineScope(Dispatchers.Default).launch {
+                    val client = MovieClient.getInstance()
+                    val movieSearchRequest = async { client.getMoviesForQuery(query) }
+                    val tvSearchRequest = async { client.getTvShowsForQuery(query) }
 
-                val movieSearchResults = ResponseUtils.processResponse(movieSearchRequest.await())
-                val tvSearchResults = ResponseUtils.processResponse(tvSearchRequest.await())
-                val searchViewModel = SearchViewModel(
-                    query = query,
-                    hasDataLoaded = true,
-                    movieSearchResults = ResponseUtils.convertToActionableResults(movieSearchResults),
-                    tvSearchResults = ResponseUtils.convertToActionableResults(tvSearchResults)
-                )
-                getMutableState { mutableState ->
-                    mutableState.value = mutableState.value.copy(screenViewModel = searchViewModel)
+                    val movieSearchResults = ResponseUtils.processResponse(movieSearchRequest.await())
+                    val tvSearchResults = ResponseUtils.processResponse(tvSearchRequest.await())
+                    val searchViewModel = SearchViewModel(
+                        query = query,
+                        hasDataLoaded = true,
+                        movieSearchResults = ResponseUtils.convertToActionableResults(movieSearchResults),
+                        tvSearchResults = ResponseUtils.convertToActionableResults(tvSearchResults)
+                    )
+                    getMutableState { mutableState ->
+                        mutableState.value = mutableState.value.copy(screenViewModel = searchViewModel)
+                    }
                 }
             }
         }
