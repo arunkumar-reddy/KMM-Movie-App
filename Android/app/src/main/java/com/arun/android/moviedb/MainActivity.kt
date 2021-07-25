@@ -27,6 +27,10 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        application?.onBackPress()
+    }
+
     @Synchronized
     fun initApplication(updateState: (appState: AppState) -> Unit) {
         if (application == null) {

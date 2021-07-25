@@ -49,6 +49,10 @@ class Application(val updateAppState: (appState: AppState) -> Unit, private val 
         }
     }
 
+    fun onBackPress() {
+        dispatch(NavigationAction(NavigationType.BACK))
+    }
+
     private suspend fun getMutableStateWithLock(updateState: (MutableStateFlow<AppState>) -> Unit) {
         actionHandlerLock.withLock {
             updateState(mutableAppState)

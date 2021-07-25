@@ -5,9 +5,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.sp
 import com.arun.android.moviedb.components.search.SearchInputWidget
 import com.arun.android.moviedb.components.search.SearchResultsWidget
 import com.arun.android.moviedb.screens.home.Loader
@@ -36,6 +38,9 @@ fun SearchScreen(viewModel: SearchViewModel, dispatcher: ActionDispatcher) {
                     }
                 }
             }
-        }
+        } ?: Text(
+            text = "Search for the latest movies or tv shows",
+            fontSize = 20.sp
+        )
     }
 }
