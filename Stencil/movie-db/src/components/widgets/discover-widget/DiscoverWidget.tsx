@@ -15,7 +15,7 @@ export class DiscoverWidget {
                 <div class="listContainer">
                     {this.data.map((item) => (
                         <div class="itemContainer">
-                            <p class="item">{item._title ?? item._name}</p>
+                            <p class="item">{item.result.title ?? item.result.name}</p>
                         </div>
                     ))}
                 </div>

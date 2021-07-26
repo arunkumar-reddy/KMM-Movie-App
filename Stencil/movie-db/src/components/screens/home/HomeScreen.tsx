@@ -10,9 +10,7 @@ export class HomeScreen {
 
     componentWillLoad() {
         if (!this.homeScreenViewModel.hasDataLoaded) {
-            this.dispatcher.dispatch({
-                type: 'LOAD_HOME_SCREEN'
-            });
+            this.dispatcher.dispatch(this.homeScreenViewModel.loadAction);
         }
     }
     

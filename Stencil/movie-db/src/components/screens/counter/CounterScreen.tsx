@@ -9,23 +9,15 @@ export class CounterScreen {
     @Prop() dispatcher: any;
 
     incrementCounter = () => {
-        this.dispatcher.dispatch({
-            type: 'INCREMENT_COUNTER'
-        });
+        this.dispatcher.dispatch(this.counterViewModel.incrementAction);
     }
 
     decrementCounter = () => {
-        this.dispatcher.dispatch({
-            type: 'DECREMENT_COUNTER'
-        });
+        this.dispatcher.dispatch(this.counterViewModel.decrementAction);
     }
 
     navigateToHome = () => {
-        this.dispatcher.dispatch({
-            type: 'NAVIGATE',
-            navigationType: 'FORWARD',
-            screenName: '/home'
-        });
+        this.dispatcher.dispatch(this.counterViewModel.submitAction);
     }
     
     render() {
