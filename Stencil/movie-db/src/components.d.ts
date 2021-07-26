@@ -7,9 +7,10 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface AppBar {
-        "appBarColor": string;
-        "appBarTextColor": string;
-        "appBarTitle": string;
+        "appBarState": any;
+    }
+    interface AppBottomBar {
+        "bottomBarState": any;
     }
     interface AppContainer {
     }
@@ -37,6 +38,12 @@ declare global {
     var HTMLAppBarElement: {
         prototype: HTMLAppBarElement;
         new (): HTMLAppBarElement;
+    };
+    interface HTMLAppBottomBarElement extends Components.AppBottomBar, HTMLStencilElement {
+    }
+    var HTMLAppBottomBarElement: {
+        prototype: HTMLAppBottomBarElement;
+        new (): HTMLAppBottomBarElement;
     };
     interface HTMLAppContainerElement extends Components.AppContainer, HTMLStencilElement {
     }
@@ -70,6 +77,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "app-bar": HTMLAppBarElement;
+        "app-bottom-bar": HTMLAppBottomBarElement;
         "app-container": HTMLAppContainerElement;
         "app-counter-screen": HTMLAppCounterScreenElement;
         "app-discover-widget": HTMLAppDiscoverWidgetElement;
@@ -79,9 +87,10 @@ declare global {
 }
 declare namespace LocalJSX {
     interface AppBar {
-        "appBarColor"?: string;
-        "appBarTextColor"?: string;
-        "appBarTitle"?: string;
+        "appBarState"?: any;
+    }
+    interface AppBottomBar {
+        "bottomBarState"?: any;
     }
     interface AppContainer {
     }
@@ -104,6 +113,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "app-bar": AppBar;
+        "app-bottom-bar": AppBottomBar;
         "app-container": AppContainer;
         "app-counter-screen": AppCounterScreen;
         "app-discover-widget": AppDiscoverWidget;
@@ -116,6 +126,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "app-bar": LocalJSX.AppBar & JSXBase.HTMLAttributes<HTMLAppBarElement>;
+            "app-bottom-bar": LocalJSX.AppBottomBar & JSXBase.HTMLAttributes<HTMLAppBottomBarElement>;
             "app-container": LocalJSX.AppContainer & JSXBase.HTMLAttributes<HTMLAppContainerElement>;
             "app-counter-screen": LocalJSX.AppCounterScreen & JSXBase.HTMLAttributes<HTMLAppCounterScreenElement>;
             "app-discover-widget": LocalJSX.AppDiscoverWidget & JSXBase.HTMLAttributes<HTMLAppDiscoverWidgetElement>;

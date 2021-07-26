@@ -1,7 +1,9 @@
 import { Component, Prop, h} from '@stencil/core';
 
 @Component({
-    tag: 'app-screen'
+    tag: 'app-screen',
+    styleUrl: 'Screen.css',
+    shadow: true
 })
 export class Screen {
     @Prop() screenType: any;
@@ -19,6 +21,8 @@ export class Screen {
             default:
                 break;
         }
-        return screen;
+        return (
+            <div class="screenContainer">{screen}</div>
+        );
     }
 }

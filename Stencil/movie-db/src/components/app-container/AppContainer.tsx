@@ -3,6 +3,7 @@ const sdk = (window as any).moviesdk.com.arun.moviedb.sdk as any;
 
 @Component({
     tag: 'app-container',
+    styleUrl: 'AppContainer.css',
     shadow: true,
 })
 export class AppContainer {
@@ -23,33 +24,17 @@ export class AppContainer {
             return null;
         }
         return (
-            <div>
-                {this.renderAppBar(this.appState.appBarState)}
-                {this.renderScreen(this.appState.navigationState?.screenType, this.appState.screenViewModel)}
+            <div class="container">
+                {this.appState.appBarState && <app-bar appBarState={this.appState.appBarState}/>}
+                {this.appState.navigationState && 
+                    <app-screen 
+                        screenType={this.appState.navigationState.screenType} 
+                        screenViewModel={this.appState.screenViewModel}
+                        dispatcher={this.application}
+                    />
+                }
+                {this.appState.bottomBarState && <app-bottom-bar bottomBarState={this.appState.bottomBarState}/>}
             </div>
         );
-    }
-
-    renderAppBar(appBarState) {
-        if (!appBarState) {
-            return null;
-        }
-        return (
-            <app-bar 
-                appBarTitle={this.appState.appBarState?.title}
-                appBarColor={this.appState.appBarState?.appBarColor}
-                appBarTextColor={this.appState.appBarState?.appBarTextColor}
-            />
-        )
-    }
-
-    renderScreen(screenType: any, screenViewModel: any) {
-        return (
-            <app-screen 
-                screenType={screenType} 
-                screenViewModel={screenViewModel}
-                dispatcher={this.application}
-            />
-        )
     }
 }

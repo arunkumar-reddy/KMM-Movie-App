@@ -13,7 +13,7 @@ export class DiscoverWidget {
             <div>
                 <p class="title">{this.name}</p>
                 <div class="listContainer">
-                    {this.data.map((item) => (
+                    {this.data.map(item => (
                         <div class="itemContainer">
                             <p class="item">{item.result.title ?? item.result.name}</p>
                         </div>

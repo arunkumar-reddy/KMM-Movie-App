@@ -6,14 +6,12 @@ import { Component, Prop, h } from '@stencil/core';
     shadow: true,
 })
 export class AppBar {
-    @Prop() appBarTitle: string;
-    @Prop() appBarColor: string;
-    @Prop() appBarTextColor: string;
+    @Prop() appBarState: any;
 
     render() {
         return (
-            <header style={{ background: this.appBarColor }}>
-                <h1 style={{ color: this.appBarTextColor }}>{this.appBarTitle}</h1>
+            <header class="appBarContainer" style={{ background: this.appBarState.appBarColor }}>
+                <h1 class="appBarText" style={{ color: this.appBarState.appBarTextColor }}>{this.appBarState.title}</h1>
             </header>
         );
     }
