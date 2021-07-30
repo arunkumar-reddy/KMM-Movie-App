@@ -1,8 +1,7 @@
 import { Component, Prop, h} from '@stencil/core';
 
 @Component({
-    tag: 'app-home-screen',
-    styleUrl: 'HomeScreen.css'
+    tag: 'app-home-screen'
 })
 export class HomeScreen {
     @Prop() homeScreenViewModel: any;

@@ -11,6 +11,7 @@ export namespace Components {
     }
     interface AppBottomBar {
         "bottomBarState": any;
+        "dispatcher": any;
     }
     interface AppContainer {
     }
@@ -30,6 +31,14 @@ export namespace Components {
         "dispatcher": any;
         "screenType": any;
         "screenViewModel": any;
+    }
+    interface AppSearchResults {
+        "results": any[];
+        "title": string;
+    }
+    interface AppSearchScreen {
+        "dispatcher": any;
+        "searchViewModel": any;
     }
 }
 declare global {
@@ -75,6 +84,18 @@ declare global {
         prototype: HTMLAppScreenElement;
         new (): HTMLAppScreenElement;
     };
+    interface HTMLAppSearchResultsElement extends Components.AppSearchResults, HTMLStencilElement {
+    }
+    var HTMLAppSearchResultsElement: {
+        prototype: HTMLAppSearchResultsElement;
+        new (): HTMLAppSearchResultsElement;
+    };
+    interface HTMLAppSearchScreenElement extends Components.AppSearchScreen, HTMLStencilElement {
+    }
+    var HTMLAppSearchScreenElement: {
+        prototype: HTMLAppSearchScreenElement;
+        new (): HTMLAppSearchScreenElement;
+    };
     interface HTMLElementTagNameMap {
         "app-bar": HTMLAppBarElement;
         "app-bottom-bar": HTMLAppBottomBarElement;
@@ -83,6 +104,8 @@ declare global {
         "app-discover-widget": HTMLAppDiscoverWidgetElement;
         "app-home-screen": HTMLAppHomeScreenElement;
         "app-screen": HTMLAppScreenElement;
+        "app-search-results": HTMLAppSearchResultsElement;
+        "app-search-screen": HTMLAppSearchScreenElement;
     }
 }
 declare namespace LocalJSX {
@@ -91,6 +114,7 @@ declare namespace LocalJSX {
     }
     interface AppBottomBar {
         "bottomBarState"?: any;
+        "dispatcher"?: any;
     }
     interface AppContainer {
     }
@@ -111,6 +135,14 @@ declare namespace LocalJSX {
         "screenType"?: any;
         "screenViewModel"?: any;
     }
+    interface AppSearchResults {
+        "results"?: any[];
+        "title"?: string;
+    }
+    interface AppSearchScreen {
+        "dispatcher"?: any;
+        "searchViewModel"?: any;
+    }
     interface IntrinsicElements {
         "app-bar": AppBar;
         "app-bottom-bar": AppBottomBar;
@@ -119,6 +151,8 @@ declare namespace LocalJSX {
         "app-discover-widget": AppDiscoverWidget;
         "app-home-screen": AppHomeScreen;
         "app-screen": AppScreen;
+        "app-search-results": AppSearchResults;
+        "app-search-screen": AppSearchScreen;
     }
 }
 export { LocalJSX as JSX };
@@ -132,6 +166,8 @@ declare module "@stencil/core" {
             "app-discover-widget": LocalJSX.AppDiscoverWidget & JSXBase.HTMLAttributes<HTMLAppDiscoverWidgetElement>;
             "app-home-screen": LocalJSX.AppHomeScreen & JSXBase.HTMLAttributes<HTMLAppHomeScreenElement>;
             "app-screen": LocalJSX.AppScreen & JSXBase.HTMLAttributes<HTMLAppScreenElement>;
+            "app-search-results": LocalJSX.AppSearchResults & JSXBase.HTMLAttributes<HTMLAppSearchResultsElement>;
+            "app-search-screen": LocalJSX.AppSearchScreen & JSXBase.HTMLAttributes<HTMLAppSearchScreenElement>;
         }
     }
 }

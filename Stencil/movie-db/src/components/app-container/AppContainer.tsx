@@ -23,17 +23,18 @@ export class AppContainer {
         if (!this.appState) {
             return null;
         }
+        const { appBarState, bottomBarState, navigationState, screenViewModel } = this.appState;
         return (
             <div class="container">
-                {this.appState.appBarState && <app-bar appBarState={this.appState.appBarState}/>}
-                {this.appState.navigationState && 
+                {appBarState && <app-bar appBarState={appBarState}/>}
+                {navigationState && 
                     <app-screen 
-                        screenType={this.appState.navigationState.screenType} 
-                        screenViewModel={this.appState.screenViewModel}
+                        screenType={navigationState.screenType} 
+                        screenViewModel={screenViewModel}
                         dispatcher={this.application}
                     />
                 }
-                {this.appState.bottomBarState && <app-bottom-bar bottomBarState={this.appState.bottomBarState}/>}
+                {bottomBarState && <app-bottom-bar bottomBarState={bottomBarState} dispatcher={this.application}/>}
             </div>
         );
     }

@@ -2,7 +2,6 @@ import { Component, Prop, h} from '@stencil/core';
 
 @Component({
     tag: 'app-screen',
-    styleUrl: 'Screen.css',
     shadow: true
 })
 export class Screen {
@@ -18,11 +17,13 @@ export class Screen {
                 break;
             case 'HOME':
                 screen = <app-home-screen homeScreenViewModel={this.screenViewModel} dispatcher={this.dispatcher}/>
+                break;
+            case 'BROWSE':
+                screen = <app-search-screen searchViewModel={this.screenViewModel} dispatcher={this.dispatcher}/>
+                break;
             default:
                 break;
         }
-        return (
-            <div class="screenContainer">{screen}</div>
-        );
+        return screen;
     }
 }
