@@ -7,8 +7,6 @@ import com.arun.moviedb.sdk.handlers.ActionHandler
 import com.arun.moviedb.sdk.network.MovieClient
 import com.arun.moviedb.sdk.utils.ResponseUtils
 import com.arun.moviedb.sdk.viewmodels.home.HomeScreenViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -20,8 +18,9 @@ class HomeScreenLoadHandler: ActionHandler {
         dispatcher: ActionDispatcher,
         getMutableState: suspend ((MutableStateFlow<AppState>) -> Unit) -> Unit
     ) {
-        if (state.screenViewModel is HomeScreenViewModel) {
-            CoroutineScope(Dispatchers.Default).launch {
+        val viewModel = state.screenViewModel
+        if (viewModel is HomeScreenViewModel) {
+            viewModel.coroutineScope.launch {
                 val client = MovieClient.getInstance()
                 val popularMoviesRequest = async { client.getMostPopularMovies() }
                 val regionalMoviesRequest = async { client.getMoviesByRegion() }

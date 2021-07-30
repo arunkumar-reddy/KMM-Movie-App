@@ -7,8 +7,6 @@ import com.arun.moviedb.sdk.handlers.ActionHandler
 import com.arun.moviedb.sdk.network.MovieClient
 import com.arun.moviedb.sdk.utils.ResponseUtils
 import com.arun.moviedb.sdk.viewmodels.search.SearchViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -20,9 +18,10 @@ class SearchActionHandler: ActionHandler {
         dispatcher: ActionDispatcher,
         getMutableState: suspend ((MutableStateFlow<AppState>) -> Unit) -> Unit
     ) {
-        if (state.screenViewModel is SearchViewModel) {
-            state.screenViewModel.query?.let { query ->
-                CoroutineScope(Dispatchers.Default).launch {
+        val viewModel = state.screenViewModel
+        if (viewModel is SearchViewModel) {
+            viewModel.query?.let { query ->
+                viewModel.coroutineScope.launch {
                     val client = MovieClient.getInstance()
                     val movieSearchRequest = async { client.getMoviesForQuery(query) }
                     val tvSearchRequest = async { client.getTvShowsForQuery(query) }

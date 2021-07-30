@@ -3,7 +3,7 @@ package com.arun.moviedb.sdk.viewmodels.home
 import com.arun.moviedb.sdk.dispatcher.actions.Action
 import com.arun.moviedb.sdk.dispatcher.actions.ActionTypes
 import com.arun.moviedb.sdk.models.actionable.ActionableDiscoverResult
-import com.arun.moviedb.sdk.viewmodels.ViewModel
+import com.arun.moviedb.sdk.viewmodels.BaseViewModel
 import kotlin.js.JsName
 
 class HomeScreenViewModel(
@@ -21,4 +21,4 @@ class HomeScreenViewModel(
     val popularTvShows: List<ActionableDiscoverResult>? = null,
     @JsName("latestTvShows")
     val latestTvShows: List<ActionableDiscoverResult>? = null
-): ViewModel
+): BaseViewModel()

@@ -9,6 +9,7 @@ import com.arun.moviedb.sdk.handlers.ActionHandler
 import com.arun.moviedb.sdk.navigation.Navigator
 import com.arun.moviedb.sdk.navigation.router.Router
 import com.arun.moviedb.sdk.viewmodels.bottombar.BottomBarBuilder
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class NavigationHandler(private val navigator: Navigator): ActionHandler {
@@ -33,6 +34,7 @@ class NavigationHandler(private val navigator: Navigator): ActionHandler {
             navigator.getCurrentScreen()?.let { currentScreen ->
                 val viewModel = Router.getViewModelForScreen(currentScreen.screenType, currentScreen.screenName)
                 val showBottomBar = showBottomBar(currentScreen.screenName)
+                state.screenViewModel?.coroutineScope?.cancel("viewModel scope cancelled as user has navigated away from the page")
                 getMutableState { mutableState ->
                     mutableState.value = mutableState.value.copy(
                         navigationState = currentScreen,

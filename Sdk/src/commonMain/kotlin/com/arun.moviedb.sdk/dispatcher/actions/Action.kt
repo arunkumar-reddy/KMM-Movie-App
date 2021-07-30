@@ -1,4 +1,6 @@
 package com.arun.moviedb.sdk.dispatcher.actions
 
-open class Action (val type: ActionTypes)
+import kotlin.js.JsExport
 
+@JsExport
+open class Action (val type: ActionTypes)

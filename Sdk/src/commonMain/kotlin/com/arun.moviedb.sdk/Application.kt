@@ -26,6 +26,7 @@ class Application(val updateAppState: (appState: AppState) -> Unit, private val 
         bottomBarState = BottomBarState(showBottomBar = true, selectedIndex = 0, bottomBarItems = BottomBarBuilder.getBottomBarItems())
     ))
     private val actionHandlerLock = Mutex()
+    private val appCoroutineScope = CoroutineScope(Dispatchers.Main)
 
     init {
         CoroutineScope(Dispatchers.Main).launch {
@@ -40,7 +41,7 @@ class Application(val updateAppState: (appState: AppState) -> Unit, private val 
 
     override fun dispatch(action: Action) {
         val actionDispatcher: ActionDispatcher = this
-        CoroutineScope(Dispatchers.Main).launch {
+        appCoroutineScope.launch {
             val actionHandlers = ActionMapper.getHandlersForAction(action.type)
             actionHandlers.forEach { handler ->
                 handler.handleAction(action, mutableAppState.value, actionDispatcher) {

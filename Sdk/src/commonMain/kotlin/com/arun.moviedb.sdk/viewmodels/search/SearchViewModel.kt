@@ -1,7 +1,7 @@
 package com.arun.moviedb.sdk.viewmodels.search
 
 import com.arun.moviedb.sdk.models.actionable.ActionableDiscoverResult
-import com.arun.moviedb.sdk.viewmodels.ViewModel
+import com.arun.moviedb.sdk.viewmodels.BaseViewModel
 import kotlin.js.JsName
 
 class SearchViewModel(
@@ -15,4 +15,4 @@ class SearchViewModel(
     val movieSearchResults: List<ActionableDiscoverResult>? = null,
     @JsName("tvSearchResults")
     val tvSearchResults: List<ActionableDiscoverResult>? = null
-): ViewModel
+): BaseViewModel()
