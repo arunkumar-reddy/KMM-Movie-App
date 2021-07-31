@@ -17,7 +17,7 @@ import com.arun.moviedb.sdk.viewmodels.home.HomeScreenViewModel
 fun HomeScreen(viewModel: HomeScreenViewModel, dispatcher: ActionDispatcher) {
     Column(modifier = Modifier.fillMaxSize()) {
         if (!viewModel.hasDataLoaded) {
-            Row(modifier = Modifier.align(Alignment.CenterHorizontally), verticalAlignment = Alignment.CenterVertically) {
+            Column(modifier = Modifier.fillMaxHeight().align(Alignment.CenterHorizontally), verticalArrangement = Arrangement.Center ) {
                 Loader()
             }
             dispatcher.dispatch(viewModel.loadAction)

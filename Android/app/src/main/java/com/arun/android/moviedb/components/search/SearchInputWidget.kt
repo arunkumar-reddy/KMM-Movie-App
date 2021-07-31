@@ -2,6 +2,7 @@ package com.arun.android.moviedb.components.search
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.Button
@@ -12,7 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.arun.android.moviedb.utils.ColorUtils
+import com.arun.android.moviedb.utils.Colors
 import com.arun.moviedb.sdk.dispatcher.ActionDispatcher
 import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationAction
 import com.arun.moviedb.sdk.dispatcher.actions.navigation.NavigationType
@@ -28,7 +29,7 @@ fun SearchInputWidget(query: String, dispatcher: ActionDispatcher) {
             modifier = Modifier.weight(3f)
         )
         Button(
-            modifier = Modifier.background(color = ColorUtils.getColorFromHex("#FFC107")).weight(1f),
+            modifier = Modifier.background(color = Colors.appYellow).weight(1f).fillMaxHeight(),
             onClick = {
                 val screenName = ScreenNames.SEARCH + "/" + text
                 dispatcher.dispatch(NavigationAction(NavigationType.FORWARD, screenName))
@@ -36,7 +37,7 @@ fun SearchInputWidget(query: String, dispatcher: ActionDispatcher) {
         ) {
             Text(
                 text = "Search",
-                color = ColorUtils.getColorFromHex("#000000")
+                color = Colors.appBlack
             )
         }
     }

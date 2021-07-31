@@ -15,7 +15,7 @@ import com.arun.moviedb.sdk.viewmodels.appbar.AppBarState
 @Composable
 fun AppBar(appBar: AppBarState) {
     Box(
-        modifier = Modifier.background(ColorUtils.getColorFromHex(appBar.appBarColor)).fillMaxWidth().height(50.dp)
+        modifier = Modifier.background(ColorUtils.getColorFromHex(appBar.appBarColor)).fillMaxWidth().height(60.dp)
     ) {
         Text(
             text = appBar.title,
