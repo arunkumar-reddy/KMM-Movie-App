@@ -14,7 +14,7 @@ class CommonNavigator: Navigator {
 
     override fun navigateTo(screenName: String) {
         val screenType = Router.getScreenType(screenName)
-        navigationStack.add(NavigationState(screenName, screenType))
+        navigationStack.add(NavigationState(screenName, screenType, getCurrentScreen()))
     }
 
     override fun goBack() {
@@ -28,7 +28,7 @@ class CommonNavigator: Navigator {
         if (!navigationStack.isEmpty()) {
             navigationStack.removeLast()
         }
-        navigationStack.add(NavigationState(screenName, screenType))
+        navigationStack.add(NavigationState(screenName, screenType, getCurrentScreen()))
     }
 
     override fun getCurrentScreen(): NavigationState? {

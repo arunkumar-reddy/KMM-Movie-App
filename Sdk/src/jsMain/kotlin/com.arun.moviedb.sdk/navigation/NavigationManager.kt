@@ -7,7 +7,9 @@ actual class NavigationManager: Navigator {
 
     actual override fun navigateTo(screenName: String) {
         navigator.navigateTo(screenName)
-        window.history.pushState(navigator.getCurrentScreen(), screenName, screenName)
+        getCurrentScreen()?.let {
+            window.history.pushState(getHistoryEntry(it), screenName, screenName)
+        }
     }
 
     actual override fun goBack() {
@@ -16,10 +18,19 @@ actual class NavigationManager: Navigator {
 
     actual override fun replaceAndNavigateTo(screenName: String) {
         navigator.replaceAndNavigateTo(screenName)
-        window.history.replaceState(navigator.getCurrentScreen(), screenName, screenName)
+        getCurrentScreen()?.let {
+            window.history.replaceState(getHistoryEntry(it), screenName, screenName)
+        }
     }
 
     actual override fun getCurrentScreen(): NavigationState? {
         return navigator.getCurrentScreen()
+    }
+
+    private fun getHistoryEntry(screen: NavigationState): dynamic {
+        val historyEntry: dynamic = object {}
+        historyEntry["screenName"] = screen.screenName
+        historyEntry["screenType"] = screen.screenType.name
+        return historyEntry
     }
 }
