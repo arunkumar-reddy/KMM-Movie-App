@@ -32,8 +32,8 @@ export class SearchScreen {
                 {query ?
                     hasDataLoaded ? 
                         <div>
-                            {movieSearchResults && <app-search-results title={"Showing Movie Results"} results={movieSearchResults._array}/>}
-                            {tvSearchResults && <app-search-results title={"Showing TV Results"} results={tvSearchResults._array}/>}
+                            {movieSearchResults && <app-search-results heading={"Showing Movie Results"} results={movieSearchResults._array}/>}
+                            {tvSearchResults && <app-search-results heading={"Showing TV Results"} results={tvSearchResults._array}/>}
                         </div> 
                         : <div>Loading search results</div>
                     : <div>Search for your favorite movies and tv shows</div>

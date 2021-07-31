@@ -5,13 +5,13 @@ import { Component, Prop, h} from '@stencil/core';
     styleUrl: 'SearchResultsWidget.css'
 })
 export class SearchResultsWidget {
-    @Prop() title: string;
+    @Prop() heading: string;
     @Prop() results: any[];
 
     render() {
         return (
             <div>
-                <p>{this.title}</p>
+                <p>{this.heading}</p>
                 <div>
                     {this.results.map(item => (
                         <div>

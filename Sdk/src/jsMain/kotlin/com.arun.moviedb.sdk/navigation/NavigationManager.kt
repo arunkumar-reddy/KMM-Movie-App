@@ -8,6 +8,10 @@ actual class NavigationManager: Navigator {
     actual override fun navigateTo(screenName: String) {
         navigator.navigateTo(screenName)
         getCurrentScreen()?.let {
+            val historyEntry = window.history.state.asDynamic()
+            if (screenName == historyEntry["screenName"]) {
+                return
+            }
             window.history.pushState(getHistoryEntry(it), screenName, screenName)
         }
     }

@@ -37,8 +37,8 @@ export namespace Components {
         "query": string;
     }
     interface AppSearchResults {
+        "heading": string;
         "results": any[];
-        "title": string;
     }
     interface AppSearchScreen {
         "dispatcher": any;
@@ -151,8 +151,8 @@ declare namespace LocalJSX {
         "query"?: string;
     }
     interface AppSearchResults {
+        "heading"?: string;
         "results"?: any[];
-        "title"?: string;
     }
     interface AppSearchScreen {
         "dispatcher"?: any;
