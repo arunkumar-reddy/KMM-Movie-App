@@ -32,6 +32,10 @@ export namespace Components {
         "screenType": any;
         "screenViewModel": any;
     }
+    interface AppSearchInput {
+        "dispatcher": any;
+        "query": string;
+    }
     interface AppSearchResults {
         "results": any[];
         "title": string;
@@ -84,6 +88,12 @@ declare global {
         prototype: HTMLAppScreenElement;
         new (): HTMLAppScreenElement;
     };
+    interface HTMLAppSearchInputElement extends Components.AppSearchInput, HTMLStencilElement {
+    }
+    var HTMLAppSearchInputElement: {
+        prototype: HTMLAppSearchInputElement;
+        new (): HTMLAppSearchInputElement;
+    };
     interface HTMLAppSearchResultsElement extends Components.AppSearchResults, HTMLStencilElement {
     }
     var HTMLAppSearchResultsElement: {
@@ -104,6 +114,7 @@ declare global {
         "app-discover-widget": HTMLAppDiscoverWidgetElement;
         "app-home-screen": HTMLAppHomeScreenElement;
         "app-screen": HTMLAppScreenElement;
+        "app-search-input": HTMLAppSearchInputElement;
         "app-search-results": HTMLAppSearchResultsElement;
         "app-search-screen": HTMLAppSearchScreenElement;
     }
@@ -135,6 +146,10 @@ declare namespace LocalJSX {
         "screenType"?: any;
         "screenViewModel"?: any;
     }
+    interface AppSearchInput {
+        "dispatcher"?: any;
+        "query"?: string;
+    }
     interface AppSearchResults {
         "results"?: any[];
         "title"?: string;
@@ -151,6 +166,7 @@ declare namespace LocalJSX {
         "app-discover-widget": AppDiscoverWidget;
         "app-home-screen": AppHomeScreen;
         "app-screen": AppScreen;
+        "app-search-input": AppSearchInput;
         "app-search-results": AppSearchResults;
         "app-search-screen": AppSearchScreen;
     }
@@ -166,6 +182,7 @@ declare module "@stencil/core" {
             "app-discover-widget": LocalJSX.AppDiscoverWidget & JSXBase.HTMLAttributes<HTMLAppDiscoverWidgetElement>;
             "app-home-screen": LocalJSX.AppHomeScreen & JSXBase.HTMLAttributes<HTMLAppHomeScreenElement>;
             "app-screen": LocalJSX.AppScreen & JSXBase.HTMLAttributes<HTMLAppScreenElement>;
+            "app-search-input": LocalJSX.AppSearchInput & JSXBase.HTMLAttributes<HTMLAppSearchInputElement>;
             "app-search-results": LocalJSX.AppSearchResults & JSXBase.HTMLAttributes<HTMLAppSearchResultsElement>;
             "app-search-screen": LocalJSX.AppSearchScreen & JSXBase.HTMLAttributes<HTMLAppSearchScreenElement>;
         }
