@@ -16,7 +16,6 @@ object JsUtils {
                 ActionTypes.LOAD_HOME_SCREEN -> Action(ActionTypes.LOAD_HOME_SCREEN)
                 ActionTypes.SEARCH_QUERY -> Action(ActionTypes.SEARCH_QUERY)
                 ActionTypes.NAVIGATE -> buildNavigationAction(payload)
-                else -> null
             }
         }
     }

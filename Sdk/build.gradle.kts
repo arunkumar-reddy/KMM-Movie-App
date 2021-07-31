@@ -73,6 +73,12 @@ kotlin {
                 implementation("io.ktor:ktor-client-cio:1.6.1")
             }
         }
+        val androidDebug by getting {
+            dependsOn(androidMain)
+        }
+        val androidRelease by getting {
+            dependsOn(androidMain)
+        }
         val commonMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-core:1.6.1")
@@ -81,19 +87,11 @@ kotlin {
                 //implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
             }
         }
-        val commonTest by getting {
-            dependencies {
-                //implementation(kotlin("test"))
-            }
-        }
+        val commonTest by getting
+        val jsMain by getting
+        val jsTest by getting
         val jvmMain by getting
         val jvmTest by getting
-        val jsMain by getting {
-            dependencies {
-                //implementation("io.ktor:ktor-client-js:1.6.1")
-            }
-        }
-        val jsTest by getting
         // val nativeMain by getting
         // val nativeTest by getting
     }

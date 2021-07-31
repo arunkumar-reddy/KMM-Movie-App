@@ -2,7 +2,14 @@ package com.arun.moviedb.sdk.navigation
 
 import com.arun.moviedb.sdk.navigation.router.Router
 
-class NavigationManager: Navigator {
+expect class NavigationManager(): Navigator {
+    override fun navigateTo(screenName: String)
+    override fun goBack()
+    override fun replaceAndNavigateTo(screenName: String)
+    override fun getCurrentScreen(): NavigationState?
+}
+
+class CommonNavigator: Navigator {
     private val navigationStack: ArrayDeque<NavigationState> = ArrayDeque()
 
     override fun navigateTo(screenName: String) {
