@@ -11,4 +11,5 @@ object ColorUtils {
 object Colors {
     val appYellow = ColorUtils.getColorFromHex("#FFC107")
     val appBlack = ColorUtils.getColorFromHex("#171717")
+    val appWhite = ColorUtils.getColorFromHex("#FFFFFF")
 }

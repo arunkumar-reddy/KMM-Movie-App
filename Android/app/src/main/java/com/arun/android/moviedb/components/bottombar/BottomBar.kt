@@ -21,7 +21,8 @@ fun BottomBar(bottomBar: BottomBarState, dispatcher: ActionDispatcher) {
     if (bottomBar.showBottomBar) {
         Row(modifier = Modifier
             .fillMaxWidth()
-            .height(70.dp)) {
+            .height(70.dp)
+        ) {
             bottomBar.bottomBarItems.forEachIndexed { index, item ->
                 val backgroundColor = if (index == bottomBar.selectedIndex) Colors.appYellow else Colors.appBlack
                 val textColor = if (index == bottomBar.selectedIndex) Colors.appBlack else Colors.appYellow

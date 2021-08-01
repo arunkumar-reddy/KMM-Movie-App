@@ -1,5 +1,6 @@
 package com.arun.android.moviedb.screens.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -10,12 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.arun.android.moviedb.components.discover.DiscoverWidget
 import com.arun.android.moviedb.utils.ColorUtils
+import com.arun.android.moviedb.utils.Colors
 import com.arun.moviedb.sdk.dispatcher.ActionDispatcher
 import com.arun.moviedb.sdk.viewmodels.home.HomeScreenViewModel
 
 @Composable
 fun HomeScreen(viewModel: HomeScreenViewModel, dispatcher: ActionDispatcher) {
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize().background(color = Colors.appBlack)) {
         if (!viewModel.hasDataLoaded) {
             Column(modifier = Modifier.fillMaxHeight().align(Alignment.CenterHorizontally), verticalArrangement = Arrangement.Center ) {
                 Loader()
