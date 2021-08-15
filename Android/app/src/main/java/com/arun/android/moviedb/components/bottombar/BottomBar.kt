@@ -3,6 +3,7 @@ package com.arun.android.moviedb.components.bottombar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -12,6 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.arun.android.moviedb.utils.Colors
+import com.arun.android.moviedb.utils.ImageUtils
 import com.arun.moviedb.sdk.dispatcher.ActionDispatcher
 import com.arun.moviedb.sdk.viewmodels.bottombar.BottomBarItem
 import com.arun.moviedb.sdk.viewmodels.bottombar.BottomBarState
@@ -45,12 +47,10 @@ fun BottomBar(bottomBar: BottomBarState, dispatcher: ActionDispatcher) {
 
 @Composable
 fun BottomBarItem(bottomBarItem: BottomBarItem, color: Color) {
-    Text(
-        text = bottomBarItem.title,
-        color = color,
-        fontSize = 20.sp,
-        textAlign = TextAlign.Center
-    )
+    ImageUtils.getIconForScreen(bottomBarItem.screenName)?.let { icon ->
+        Icon(icon, contentDescription = bottomBarItem.title, modifier = Modifier.size(40.dp), tint = color)
+        Text(text = bottomBarItem.title, color = color, fontSize = 16.sp, textAlign = TextAlign.Center)
+    }
 }
 
 private fun handleBottomBarItemClick(index: Int, bottomBarState: BottomBarState, dispatcher: ActionDispatcher) {

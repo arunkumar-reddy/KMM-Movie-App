@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
@@ -18,11 +19,11 @@ import com.arun.moviedb.sdk.models.actionable.ActionableDiscoverResult
 
 @Composable
 fun DiscoverWidget(title: String, data: List<ActionableDiscoverResult>) {
-    Column(modifier = Modifier.padding(16.dp)) {
-        Text( text = title, fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Colors.appYellow)
+    Column(modifier = Modifier.padding(8.dp)) {
+        Text( text = title, fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Colors.appYellow, modifier = Modifier.padding(8.dp))
         Row(modifier = Modifier
             .padding(top = 16.dp)
-            .height(120.dp)
+            .height(240.dp)
             .horizontalScroll(rememberScrollState())
         ) {
             data.forEach { item ->
@@ -37,8 +38,7 @@ fun DiscoverWidgetItem(item: ActionableDiscoverResult) {
     val titleText = item.result.title ?: item.result.name
     val posterPath = item.result.posterPath
     if (titleText != null && posterPath != null) {
-        Column(modifier = Modifier.width(200.dp)) {
-            //Text(text = titleText, fontSize = 15.sp, color = Colors.appWhite)
+        Column(modifier = Modifier.width(160.dp).padding(8.dp)) {
             Image(
                 painter = rememberImagePainter(
                     data = ImageUtils.getImageUrl(posterPath),
@@ -47,7 +47,15 @@ fun DiscoverWidgetItem(item: ActionableDiscoverResult) {
                     }
                 ),
                 contentDescription = null,
-                modifier = Modifier.padding(8.dp).fillMaxWidth().fillMaxHeight().align(Alignment.CenterHorizontally)
+                modifier = Modifier.fillMaxWidth().fillMaxHeight(0.9f).align(Alignment.CenterHorizontally)
+            )
+            Text(
+                text = titleText,
+                fontSize = 16.sp,
+                color = Colors.appWhite,
+                overflow = TextOverflow.Visible,
+                softWrap = true,
+                modifier = Modifier.padding(top = 8.dp).align(Alignment.CenterHorizontally)
             )
         }
     }

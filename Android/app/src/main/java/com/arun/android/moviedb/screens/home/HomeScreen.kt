@@ -24,7 +24,7 @@ fun HomeScreen(viewModel: HomeScreenViewModel, dispatcher: ActionDispatcher) {
             }
             dispatcher.dispatch(viewModel.loadAction)
         } else {
-            Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+            Column(modifier = Modifier.verticalScroll(rememberScrollState()).padding(bottom = 8.dp)) {
                 viewModel.popularMovies?.let {
                     DiscoverWidget(title = "Popular Movies", data = it)
                 }

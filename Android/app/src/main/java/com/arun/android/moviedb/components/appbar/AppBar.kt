@@ -15,14 +15,14 @@ import com.arun.moviedb.sdk.viewmodels.appbar.AppBarState
 @Composable
 fun AppBar(appBar: AppBarState) {
     Box(
-        modifier = Modifier.background(ColorUtils.getColorFromHex(appBar.appBarColor)).fillMaxWidth().height(60.dp)
+        modifier = Modifier.background(ColorUtils.getColorFromHex(appBar.appBarColor)).fillMaxWidth().fillMaxHeight()
     ) {
         Text(
             text = appBar.title,
             color = ColorUtils.getColorFromHex(appBar.appBarTextColor),
-            fontSize = 20.sp,
+            fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(start = 10.dp).align(Alignment.CenterStart)
+            modifier = Modifier.padding(start = 16.dp).align(Alignment.CenterStart)
         )
     }
 }
